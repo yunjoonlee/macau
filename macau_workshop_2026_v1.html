@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마카오 워크샵 2026</title>
+<style>
+:root {
+  --bg: #fafaf8;
+  --ink: #111110;
+  --ink2: #6b6960;
+  --ink3: #b0ada4;
+  --line: #e8e5df;
+  --line2: #d4d0c8;
+  --surface: #f3f0eb;
+  --opt1: #2a5c3f;
+  --opt2: #2c3e6b;
+  --gold: #8a6c2a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--ink); font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; font-size: 13px; line-height: 1.6; }
+.shell { max-width: 760px; margin: 0 auto; padding: 0 36px 64px; }
+
+.header { padding: 52px 0 36px; border-bottom: 1px solid var(--line2); margin-bottom: 36px; }
+.header-eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink3); margin-bottom: 16px; }
+.header h1 { font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; font-size: 22px; font-weight: 700; line-height: 1.3; letter-spacing: 1.5px; color: var(--ink); }
+.header h1 em { font-style: normal; color: var(--ink); font-weight: 700; }
+.header-meta { display: flex; margin-top: 24px; border: 1px solid var(--line2); border-radius: 6px; overflow: hidden; width: fit-content; }
+.meta-item { padding: 9px 20px; border-right: 1px solid var(--line2); font-size: 11px; color: var(--ink2); }
+.meta-item:last-child { border-right: none; }
+.meta-item strong { color: var(--ink); font-weight: 500; display: block; font-size: 12px; }
+
+.opt-section { margin-bottom: 36px; }
+.opt-eyebrow { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); margin-bottom: 10px; }
+.opt-toggle { display: flex; border: 1px solid var(--line2); border-radius: 6px; overflow: hidden; width: fit-content; }
+.opt-btn { padding: 11px 28px; background: var(--bg); border: none; cursor: pointer; font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; font-size: 12px; color: var(--ink2); border-right: 1px solid var(--line2); display: flex; align-items: center; gap: 12px; transition: all .15s; }
+.opt-btn:last-child { border-right: none; }
+.opt-btn.active { background: var(--ink); color: #fff; }
+.opt-btn .t { font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; font-style: normal; font-size: 18px; font-weight: 600; }
+.opt-btn .d { font-size: 11px; line-height: 1.4; text-align: left; }
+
+.nav { display: flex; border-bottom: 1px solid var(--line2); margin-bottom: 40px; }
+.nav-btn { padding: 10px 0; margin-right: 28px; background: none; border: none; border-bottom: 2px solid transparent; font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; font-size: 12px; color: var(--ink3); cursor: pointer; margin-bottom: -1px; transition: all .15s; white-space: nowrap; }
+.nav-btn.active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 500; }
+.nav-btn:hover:not(.active) { color: var(--ink2); }
+
+.day-section { display: none; }
+.day-section.active { display: block; }
+
+.sec-head { margin-bottom: 28px; }
+.sec-head h2 { font-family: 'Malgun Gothic', '맑은 고딕', sans-serif; font-size: 18px; font-weight: 300; letter-spacing: 0.8px; color: var(--ink); }
+.sec-head p { font-size: 12px; color: var(--ink3); margin-top: 4px; }
+
+.timeline { }
+.tl-row { display: grid; grid-template-columns: 80px 1fr; gap: 0 24px; padding-bottom: 24px; position: relative; }
+.tl-row::after { content: ''; position: absolute; left: 92px; top: 8px; bottom: 0; width: 1px; background: var(--line); }
+.tl-row:last-child::after { display: none; }
+.tl-time { font-size: 11px; color: var(--ink3); text-align: right; padding-top: 2px; line-height: 1.4; }
+.tl-body { padding-left: 22px; position: relative; }
+.tl-body::before { content: ''; position: absolute; left: -4px; top: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--line2); outline: 2px solid var(--bg); }
+.tl-row.key .tl-body::before { background: var(--ink); }
+.tl-row.show .tl-body::before { background: var(--opt1); }
+.tl-row.food .tl-body::before { background: var(--gold); }
+.tl-row.move .tl-body::before { background: #7a6abf; }
+.t-move { background: #eeebf8; color: #5a4aaf; }
+.move-pill { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; padding: 3px 10px; border-radius: 3px; background: #eeebf8; color: #5a4aaf; border: 1px solid #d4cef0; margin-top: 6px; }
+
+.tl-title { font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.4; }
+.tl-sub { font-size: 12px; color: var(--ink2); margin-top: 4px; line-height: 1.65; }
+
+.tag { font-size: 10px; padding: 2px 7px; border-radius: 3px; font-weight: 400; }
+.t-key { background: var(--ink); color: #fff; }
+.t-show { background: #e4ede8; color: var(--opt1); }
+.t-free { background: var(--surface); color: var(--ink3); }
+.t-food { background: #f5ede0; color: var(--gold); }
+
+.infobox { margin-top: 10px; padding: 12px 16px; background: var(--surface); border-radius: 5px; border-left: 2px solid var(--line2); }
+.infobox.g { border-left-color: var(--opt1); }
+.infobox.b { border-left-color: var(--opt2); }
+.infobox-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink3); margin-bottom: 5px; }
+.infobox p { font-size: 12px; color: var(--ink2); line-height: 1.7; }
+
+.cards { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.card { border: 1px solid var(--line); border-radius: 6px; overflow: hidden; transition: border-color .15s; cursor: pointer; }
+.card:hover { border-color: var(--line2); }
+.card.open { border-color: var(--ink2); }
+.card-h { display: flex; justify-content: space-between; align-items: flex-start; padding: 13px 16px; gap: 12px; }
+.card-l .n { font-size: 13px; font-weight: 500; }
+.card-l .s { font-size: 11px; color: var(--ink3); margin-top: 2px; }
+.card-r { text-align: right; flex-shrink: 0; }
+.card-r .p { font-size: 12px; font-weight: 500; color: var(--ink); }
+.bgs { display: flex; gap: 4px; margin-top: 4px; justify-content: flex-end; flex-wrap: wrap; }
+.bg { font-size: 10px; padding: 1px 6px; border-radius: 3px; border: 1px solid var(--line2); color: var(--ink3); }
+.bg.star { border-color: #c2dbc9; color: var(--opt1); background: #f0f6f2; }
+.bg.rec { border-color: #ddd4be; color: var(--gold); background: #faf5ec; }
+.card-b { display: none; padding: 12px 16px; font-size: 12px; color: var(--ink2); line-height: 1.7; border-top: 1px solid var(--line); }
+.card.open .card-b { display: block; }
+
+.pills-section { margin-bottom: 22px; }
+.pills-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink3); margin-bottom: 8px; }
+.pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.pill { font-size: 11px; padding: 4px 12px; border-radius: 4px; background: #fff; color: var(--ink2); border: 1px solid var(--line2); }
+
+.notice { padding: 14px 18px; border: 1px solid var(--line); border-radius: 6px; font-size: 12px; color: var(--ink2); line-height: 1.9; margin-top: 8px; background: var(--surface); }
+
+.budget-t { width: 100%; border-collapse: collapse; }
+.budget-t td { padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+.budget-t tr:last-child td { border-bottom: none; font-weight: 500; font-size: 14px; }
+.budget-t .lbl { color: var(--ink2); }
+.budget-t .amt { text-align: right; }
+.budget-t tr:last-child .amt { color: var(--opt1); }
+
+/* ── 모바일 반응형 ── */
+@media (max-width: 600px) {
+  .shell { padding: 0 18px 48px; }
+
+  .header { padding: 32px 0 24px; margin-bottom: 24px; }
+  .header h1 { font-size: 30px; }
+  .header-meta { flex-wrap: wrap; width: 100%; }
+  .meta-item { padding: 8px 14px; font-size: 11px; border-right: none; border-bottom: 1px solid var(--line2); width: 50%; }
+  .meta-item:nth-child(odd) { border-right: 1px solid var(--line2); }
+  .meta-item:nth-last-child(-n+2) { border-bottom: none; }
+
+  .opt-toggle { width: 100%; flex-direction: column; }
+  .opt-btn { border-right: none; border-bottom: 1px solid var(--line2); width: 100%; padding: 12px 16px; }
+  .opt-btn:last-child { border-bottom: none; }
+
+  .nav { overflow-x: auto; -webkit-overflow-scrolling: touch; gap: 0; padding-bottom: 2px; margin-bottom: 28px; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-btn { margin-right: 20px; font-size: 13px; padding: 10px 0; flex-shrink: 0; }
+
+  .tl-row { grid-template-columns: 60px 1fr; gap: 0 16px; padding-bottom: 20px; }
+  .tl-row::after { left: 68px; }
+  .tl-time { font-size: 10px; }
+  .tl-body { padding-left: 18px; }
+  .tl-title { font-size: 13px; }
+
+  .infobox p { font-size: 11px; }
+
+  .card-h { flex-direction: column; gap: 6px; }
+  .card-r { text-align: left; }
+  .bgs { justify-content: flex-start; }
+
+  .sec-head h2 { font-size: 20px; }
+
+  .budget-t td { font-size: 12px; }
+  .budget-t tr:last-child td { font-size: 13px; }
+
+  #leaflet-map { height: 340px; }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<div class="header">
+  <div class="header-eyebrow">July 17–19, 2026</div>
+  <h1>부서 워크샵 · <em>마카오 2026</em></h1>
+  <div class="header-meta">
+    <div class="meta-item"><strong>13명</strong>인원</div>
+    <div class="meta-item"><strong>브로드웨이 호텔</strong>숙소 · 코타이</div>
+    <div class="meta-item"><strong>KE2015 / KE2016</strong>항공</div>
+    <div class="meta-item"><strong>500만원+</strong>예산</div>
+  </div>
+</div>
+
+<div class="opt-section">
+  <div class="opt-eyebrow">하우스 오브 댄싱 워터 — 공연 시간</div>
+  <div class="opt-toggle">
+    <button class="opt-btn active" onclick="setOpt(1,this)">
+      <span class="t">16:30</span>
+      <span class="d">1안 · 이른 공연<br>→ 여유로운 회식 18:30~</span>
+    </button>
+    <button class="opt-btn" onclick="setOpt(2,this)">
+      <span class="t">19:30</span>
+      <span class="d">2안 · 저녁 공연<br>→ 늦은 회식 21:30~</span>
+    </button>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="nav-btn" onclick="go('d1',this)">7/17 금요일</button>
+  <button class="nav-btn" onclick="go('d2',this)">7/18 토요일</button>
+  <button class="nav-btn" onclick="go('d3',this)">7/19 일요일</button>
+  <button class="nav-btn" onclick="go('dinner',this)">식당 · 2차</button>
+  <button class="nav-btn" onclick="go('budget',this)">예산</button>
+  <button class="nav-btn" onclick="go('map',this)">지도</button>
+  <button class="nav-btn" onclick="go('info',this)">정보</button>
+</div>
+
+<style>
+.place-card { border:1px solid var(--line); border-radius:8px; overflow:hidden; margin-bottom:10px; cursor:pointer; transition:border-color .15s; }
+.place-card:hover { border-color:var(--line2); }
+.place-card.open { border-color:var(--ink2); }
+.place-photo { width:100%; height:160px; object-fit:cover; display:block; background:var(--surface); }
+.place-photo-placeholder { width:100%; height:120px; background:var(--surface); display:flex; align-items:center; justify-content:center; font-size:28px; }
+.place-head { padding:12px 14px 10px; display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+.place-name { font-size:13px; font-weight:500; color:var(--ink); }
+.place-type { font-size:11px; color:var(--ink3); margin-top:2px; }
+.place-price { font-size:12px; font-weight:500; color:var(--ink); white-space:nowrap; flex-shrink:0; }
+.place-meta { padding:0 14px 10px; display:flex; gap:6px; flex-wrap:wrap; }
+.place-body { display:none; padding:10px 14px 14px; border-top:1px solid var(--line); font-size:12px; color:var(--ink2); line-height:1.7; }
+.place-card.open .place-body { display:block; }
+.place-info { display:flex; flex-direction:column; gap:4px; margin-bottom:10px; font-size:11px; color:var(--ink3); }
+.place-info span { display:flex; gap:6px; align-items:flex-start; }
+.place-maps { display:inline-flex; align-items:center; gap:5px; margin-top:8px; font-size:11px; color:var(--ink); text-decoration:none; border:1px solid var(--line2); padding:5px 10px; border-radius:4px; }
+.place-maps:hover { border-color:var(--ink2); }
+.cuisine-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--ink3); margin:20px 0 10px; padding-bottom:8px; border-bottom:1px solid var(--line); }
+.cuisine-label:first-child { margin-top:0; }
+@media(max-width:600px){ .place-photo { height:130px; } }
+</style>
+
+<!-- D1 -->
+<div class="day-section active" id="d1">
+  <div class="sec-head"><h2>금요일 — 단체 일정</h2><p>하우스 오브 댄싱 워터 + 단체 회식</p></div>
+  <div class="timeline">
+
+    <!-- 공통: 도착 ~ 체크인 -->
+    <div class="tl-row key">
+      <div class="tl-time">13:00</div>
+      <div class="tl-body">
+        <div class="tl-title">마카오 착륙 <span class="tag t-key">필수</span></div>
+        <div class="tl-sub">KE2015 인천 10:10 출발 → 마카오 국제공항 13:00 착륙.</div>
+      </div>
+    </div>
+
+    <div class="tl-row">
+      <div class="tl-time">13:00–14:00</div>
+      <div class="tl-body">
+        <div class="tl-title">입국심사 · 수하물 수취</div>
+        <div class="tl-sub">마카오 공항은 소규모라 빠른 편이지만 13명 단체 기준 30~60분 예상. 수하물 찾고 1층 출구로 이동.</div>
+      </div>
+    </div>
+
+    <div class="tl-row move">
+      <div class="tl-time">14:00–14:20</div>
+      <div class="tl-body">
+        <div class="tl-title">🚌 공항 → 브로드웨이 호텔 <span class="tag t-move">이동</span></div>
+        <div class="tl-sub">공항 1층 출구 → 호텔 셔틀 승강장. Galaxy Macau / Broadway Hotel 행 무료 셔틀 탑승. 약 15~20분 소요. 별도 예약 불필요, 수시 운행.
+          <span class="move-pill">🚌 무료 셔틀 · 약 15~20분</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-row key">
+      <div class="tl-time">14:20~</div>
+      <div class="tl-body">
+        <div class="tl-title">브로드웨이 호텔 체크인 <span class="tag t-key">필수</span></div>
+        <div class="tl-sub">체크인 후 짐 정리. 얼리 체크인 불가 시 프론트에 짐 맡기고 자유 이동.</div>
+      </div>
+    </div>
+
+    <!-- 1안: 16:30 공연 -->
+    <div class="tl-row move o1">
+      <div class="tl-time">14:20–16:00</div>
+      <div class="tl-body">
+        <div class="tl-title">🏨 체크인 후 바로 준비 <span class="tag t-free">자유</span></div>
+        <div class="tl-sub">짐 맡기거나 방 확인 후 공연 준비. 브로드웨이 푸드스트리트에서 간단히 요기 가능. 15:50 로비 집결.</div>
+      </div>
+    </div>
+    <div class="tl-row move o1">
+      <div class="tl-time">15:50–16:10</div>
+      <div class="tl-body">
+        <div class="tl-title">🚕 브로드웨이 → 시티오브드림즈 <span class="tag t-move">이동</span></div>
+        <div class="tl-sub">15:50 로비 집결 → 택시 분승 이동. 코타이 내 약 10분. 13명 → 택시 3~4대. 16:15 도착 목표.
+          <span class="move-pill">🚕 택시 · 약 10분 · MOP40–50/대</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-row show o1">
+      <div class="tl-time">16:30–18:00</div>
+      <div class="tl-body">
+        <div class="tl-title">🎭 하우스 오브 댄싱 워터 <span class="tag t-show">1안 · 16:30</span></div>
+        <div class="tl-sub">세계 최대 워터쇼. 2025년 5월 리뉴얼. 약 80분. 티켓 소지 시 시티오브드림즈 레스토랑 20% 할인 + MOP200 쇼핑 혜택.</div>
+        <div class="infobox g">
+          <div class="infobox-label">티켓 (MOP · 13명 합산)</div>
+          <p>Gallery MOP698 → 약 130만원 &nbsp;／&nbsp; Signature MOP898 → 약 167만원<br>Grand MOP1,098 → 약 204만원 &nbsp;／&nbsp; Golden Circle MOP1,598 → 약 297만원</p>
+          <a href="https://www.waug.com/ko/goods/102818" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:7px 14px;background:var(--opt1);color:#fff;text-decoration:none;border-radius:4px;font-size:11px;font-weight:500;letter-spacing:0.3px;">🎟 WAUG에서 예약하기 →</a>
+        </div>
+      </div>
+    </div>
+    <div class="tl-row move o1">
+      <div class="tl-time">18:00–18:20</div>
+      <div class="tl-body">
+        <div class="tl-title">🚕 시티오브드림즈 → 회식 장소 <span class="tag t-move">이동</span></div>
+        <div class="tl-sub">북방관(베네치안) 선택 시 도보 15분 또는 택시 5분. 타이파 식당 선택 시 택시 10~15분.
+          <span class="move-pill">🚶 도보 15분 또는 🚕 택시 5~15분</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-row food o1">
+      <div class="tl-time">18:30~</div>
+      <div class="tl-body">
+        <div class="tl-title">단체 회식 + 술자리 <span class="tag t-food">1안</span></div>
+        <div class="tl-sub">공연 후 여유롭게 이동. → 식당·2차 탭 참고.</div>
+      </div>
+    </div>
+
+    <!-- 2안 -->
+    <div class="tl-row o2" style="display:none">
+      <div class="tl-time">14:30–18:45</div>
+      <div class="tl-body">
+        <div class="tl-title">자유 오후 <span class="tag t-free">자유</span></div>
+        <div class="tl-sub">체크인 후 여유롭게. 갤럭시 워터파크·수영장, 카지노, 브로드웨이 푸드스트리트 등.</div>
+      </div>
+    </div>
+    <div class="tl-row move o2" style="display:none">
+      <div class="tl-time">18:45–19:00</div>
+      <div class="tl-body">
+        <div class="tl-title">🚕 브로드웨이 → 시티오브드림즈 <span class="tag t-move">이동</span></div>
+        <div class="tl-sub">18:45 로비 집결 후 택시 분승 이동. 19:00 도착 목표 (공연 30분 전). 13명 → 택시 3~4대.
+          <span class="move-pill">🚕 택시 · 약 10분 · MOP40–50/대</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-row show o2" style="display:none">
+      <div class="tl-time">19:30–21:00</div>
+      <div class="tl-body">
+        <div class="tl-title">🎭 하우스 오브 댄싱 워터 <span class="tag t-show">2안</span></div>
+        <div class="tl-sub">세계 최대 워터쇼. 2025년 5월 리뉴얼. 약 80분. 19:00 도착 → 19:15 입장 권장.</div>
+        <div class="infobox b">
+          <div class="infobox-label">티켓 (MOP · 13명 합산)</div>
+          <p>Gallery MOP698 → 약 130만원 &nbsp;／&nbsp; Signature MOP898 → 약 167만원<br>Grand MOP1,098 → 약 204만원 &nbsp;／&nbsp; Golden Circle MOP1,598 → 약 297만원</p>
+          <a href="https://www.waug.com/ko/goods/102818" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:7px 14px;background:var(--opt2);color:#fff;text-decoration:none;border-radius:4px;font-size:11px;font-weight:500;letter-spacing:0.3px;">🎟 WAUG에서 예약하기 →</a>
+        </div>
+      </div>
+    </div>
+    <div class="tl-row move o2" style="display:none">
+      <div class="tl-time">21:00–21:20</div>
+      <div class="tl-body">
+        <div class="tl-title">🚕 시티오브드림즈 → 회식 장소 <span class="tag t-move">이동</span></div>
+        <div class="tl-sub">공연 종료 후 택시로 이동. 북방관(베네치안) 도보 15분 또는 택시 5분. 심야라 택시 대기 짧음.
+          <span class="move-pill">🚕 택시 · 5~15분</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-row food o2" style="display:none">
+      <div class="tl-time">21:30~</div>
+      <div class="tl-body">
+        <div class="tl-title">단체 회식 + 술자리 <span class="tag t-food">2안</span></div>
+        <div class="tl-sub">공연 직후 이동. 늦은 시간이지만 회식 분위기 올라옴. → 식당·2차 탭 참고.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- D2 -->
+<div class="day-section" id="d2">
+  <div class="sec-head"><h2>토요일 — 자유 일정</h2><p>참고용 추천 장소</p></div>
+
+  <div class="cuisine-label">🏛 관광</div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">세나도 광장 · 성 바울 성당 유적</div><div class="place-type">마카오 구시가지 · 유네스코 세계문화유산</div></div>
+      <div class="place-price">무료</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">마카오 필수 코스</span><span class="bg rec">무료</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 24시간 (성당 유적 야간도 가능)</span>
+        <span>📍 Largo do Senado, Macau (마카오 반도) · 브로드웨이 호텔에서 택시 15분</span>
+      </div>
+      마카오 여행의 상징. 세나도 광장 돌바닥 골목, 성 바울 성당 파사드, 주변 포르투갈식 건물들. 사진 찍기 좋고 구경거리 많음. 근처에 에그타르트 가게들도 즐비함.<br>
+      <a class="place-maps" href="https://maps.google.com/?q=Senado+Square+Macau" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">타이파 빌리지</div><div class="place-type">구시가지 골목 · 마카니즈 음식 · 로컬 카페</div></div>
+      <div class="place-price">무료 (식사 별도)</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">브로드웨이 호텔 도보 15분</span><span class="bg rec">맛집 밀집</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>📍 Taipa Village, Macau · 브로드웨이 호텔에서 도보 15분 또는 택시 5분</span>
+      </div>
+      포르투갈 타일 건물, 로컬 카페, 에그타르트 골목. 회식 식당들(덤보·A Petisqueira·Litoral 등)이 이 동네에 몰려 있어서 식사와 함께 구경하기 좋음. 오전에 여유롭게 산책하기 딱 좋은 코스.<br>
+      <a class="place-maps" href="https://maps.google.com/?q=Taipa+Village+Macau" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">마카오 타워</div><div class="place-type">전망대 · 번지점프 · 스카이워크</div></div>
+      <div class="place-price">전망대 MOP145 / 번지 MOP3,388</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">세계 최고 번지</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 매일 10:00 AM – 9:00 PM</span>
+        <span>📍 Largo da Torre de Macau, Macau · 택시 20분</span>
+        <span>📞 +853 2893 3339</span>
+      </div>
+      세계에서 가장 높은 상업용 번지점프(233m). 겁 있는 사람은 스카이워크나 전망대만 올라가도 충분. 마카오 전경 파노라마 조망.<br>
+      <a class="place-maps" href="https://maps.google.com/?q=Macau+Tower" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">콜로안 빌리지 · 로드 스토우 에그타르트</div><div class="place-type">마카오 에그타르트 원조 · 조용한 해변 마을</div></div>
+      <div class="place-price">에그타르트 MOP12~</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">에그타르트 원조</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 Lord Stow's: 매일 7:00 AM – 7:00 PM</span>
+        <span>📍 Coloane Village, Macau · 택시 25분</span>
+      </div>
+      마카오 에그타르트 원조 Lord Stow's Bakery가 있는 곳. 관광객 적고 포르투갈 감성 물씬. 작은 해변 산책도 가능. 코타이 스트립 번화함에 지쳤으면 여기서 힐링.<br>
+      <a class="place-maps" href="https://maps.google.com/?q=Lord+Stow+Bakery+Coloane+Macau" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="cuisine-label">🛍 쇼핑</div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">베네치안 그랜드 커낼 샵스</div><div class="place-type">쇼핑몰 · 실내 운하 곤돌라 · 코타이</div></div>
+      <div class="place-price">무료 입장</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">도보 10분</span><span class="bg rec">실내 곤돌라</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 매일 10:00 AM – 11:00 PM</span>
+        <span>📍 The Venetian Macao, Cotai · 브로드웨이 호텔 도보 10분</span>
+      </div>
+      실내에 베니스 운하 재현. 곤돌라 탑승 가능. 명품·중저가 브랜드 200개 이상. 더운 날 실내에서 구경하며 쉬기 좋음. 북방관도 여기 안에 있음.<br>
+      <a class="place-maps" href="https://maps.google.com/?q=The+Venetian+Macao+Grand+Canal+Shoppes+Cotai" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">DFS 갤러리아 · 파리지앵</div><div class="place-type">면세점 · 에펠탑 뷰 · 코타이</div></div>
+      <div class="place-price">무료 입장</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">면세 쇼핑</span><span class="bg rec">에펠탑 포토스팟</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>📍 Parisian Macao, Cotai · 브로드웨이 호텔 도보 10분</span>
+      </div>
+      파리지앵 호텔 외부에 에펠탑 절반 크기 복제품. 포토스팟으로 유명. DFS 면세점에서 화장품·주류·담배 쇼핑 가능. 출국 전 여기서 쇼핑하고 공항에서 픽업도 됨.<br>
+      <a class="place-maps" href="https://maps.google.com/?q=Parisian+Macao+Cotai" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="cuisine-label">🎡 액티비티 · 휴식</div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">갤럭시 그랜드 리조트 덱 (워터파크)</div><div class="place-type">워터파크 · 인피니티풀 · 인공파도 · 갤럭시 마카오</div></div>
+      <div class="place-price">숙박객 무료 / 외부 MOP588~</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">도보 가능</span><span class="bg rec">아시아 최대급</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 매일 10:00 AM – 10:00 PM (성수기 기준)</span>
+        <span>📍 Galaxy Macau, Cotai · 브로드웨이 호텔 도보 10분 (스카이브릿지 연결)</span>
+      </div>
+      인공파도풀·워터슬라이드·인피니티풀. 갤럭시 숙박객은 무료인데 브로드웨이 호텔도 갤럭시 그룹 소속이라 이용 가능 여부 체크 필요 (프론트에 문의). 7월 무더위에 딱.<br>
+      <a class="place-maps" href="https://maps.google.com/?q=Galaxy+Grand+Resort+Deck+Macau" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">스튜디오시티 골든 릴 (관람차)</div><div class="place-type">관람차 · 야경 포인트 · 코타이</div></div>
+      <div class="place-price">MOP100~</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">야경 포인트</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 매일 12:00 PM – 11:00 PM</span>
+        <span>📍 Studio City Macau, Cotai · 택시 5분</span>
+      </div>
+      세계 최초 피규어8 형태 관람차. 코타이 스트립 야경 조망 포인트. 낮보다 해질 무렵~저녁에 올라가는 게 더 예쁨.<br>
+      <a class="place-maps" href="https://maps.google.com/?q=Studio+City+Golden+Reel+Macau" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">카지노</div><div class="place-type">베네치안 · MGM · 윈팰리스 · 갤럭시</div></div>
+      <div class="place-price">자유</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">24시간</span><span class="bg rec">음료 무료</span><span class="bg rec">도보 가능</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 24시간</span>
+        <span>📍 베네치안·갤럭시 도보 10분 / MGM·윈팰리스 택시 10분</span>
+      </div>
+      블랙잭·바카라·슬롯. 게임하면 음료 무료. 그냥 구경만 해도 볼거리 있음. 윈팰리스는 케이블카로 이동하는 것 자체가 볼거리.<br>
+      <a class="place-maps" href="https://maps.google.com/?q=Venetian+Macao+Casino" target="_blank">📍 베네치안 Google Maps</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- D3 -->
+<div class="day-section" id="d3">
+  <div class="sec-head"><h2>일요일 — 브런치 · 귀국</h2><p>KE2016 14:10 출발</p></div>
+  <div class="timeline">
+    <div class="tl-row key">
+      <div class="tl-time">10:00</div>
+      <div class="tl-body">
+        <div class="tl-title">체크아웃 · 집결 <span class="tag t-key">필수</span></div>
+        <div class="tl-sub">10:00까지 체크아웃 후 로비 집결. 짐은 프론트에 맡겨도 됨.</div>
+      </div>
+    </div>
+    <div class="tl-row food">
+      <div class="tl-time">10:00–11:30</div>
+      <div class="tl-body">
+        <div class="tl-title">단체 아침 식사 <span class="tag t-key">필수</span></div>
+        <div class="tl-sub">마지막 단체 식사. → 식당·2차 탭 참고.</div>
+        <div class="cards">
+          <div class="card" onclick="this.classList.toggle('open')">
+            <div class="card-h"><div class="card-l"><div class="n">Tim Ho Wan (添好運)</div><div class="s">미슐랭 딤섬 · 브로드웨이 바로 앞 · 09:00~</div></div><div class="card-r"><div class="p">HK$100–180/인</div><div class="bgs"><span class="bg star">미슐랭</span><span class="bg rec">도보 1분</span></div></div></div>
+            <div class="card-b">세계에서 가장 저렴한 미슐랭 식당. 하가우·차슈바오·창펀 추천.</div>
+          </div>
+          <div class="card" onclick="this.classList.toggle('open')">
+            <div class="card-h"><div class="card-l"><div class="n">Tai Lei Loi Kei (大利來記)</div><div class="s">마카오 돼지고기 버거빵 원조 · 타이파 빌리지 · 08:00~</div></div><div class="card-r"><div class="p">MOP55/인</div><div class="bgs"><span class="bg rec">택시 5분</span></div></div></div>
+            <div class="card-b">1968년 원조 주파바오. Anthony Bourdain 극찬. 타이파 빌리지 산책 겸 방문 가능.</div>
+          </div>
+          <div class="card" onclick="this.classList.toggle('open')">
+            <div class="card-h"><div class="card-l"><div class="n">Broadway Kitchen</div><div class="s">뷔페식 조식 · 브로드웨이 호텔 내 · 07:00~</div></div><div class="card-r"><div class="p">MOP108/인</div><div class="bgs"><span class="bg rec">호텔 내부</span></div></div></div>
+            <div class="card-b">동·서양식 선택 + 샐러드바 셀프서비스. 이동 없이 가장 편리. 단체 동시 착석 가능.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-row move">
+      <div class="tl-time">11:45–12:05</div>
+      <div class="tl-body">
+        <div class="tl-title">🚌 브로드웨이 → 마카오 공항 <span class="tag t-move">이동</span></div>
+        <div class="tl-sub">호텔 셔틀 승강장에서 공항행 무료 셔틀 탑승. 약 15~20분 소요. 탑승 전 프론트에서 셔틀 시간 재확인 권장.
+          <span class="move-pill">🚌 무료 셔틀 · 약 15~20분</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-row key">
+      <div class="tl-time">12:10~</div>
+      <div class="tl-body">
+        <div class="tl-title">마카오 공항 도착 · 탑승 수속</div>
+        <div class="tl-sub">출발 2시간 전 공항 도착 목표. 수속·출국심사·탑승구 이동 여유 있게.</div>
+      </div>
+    </div>
+    <div class="tl-row key">
+      <div class="tl-time">14:10</div>
+      <div class="tl-body">
+        <div class="tl-title">KE2016 마카오 출발 → 인천 19:00 도착</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 식당 · 2차 통합 -->
+<div class="day-section" id="dinner">
+  <div class="sec-head"><h2>식당 · 2차 장소</h2><p>금요일 회식 · 2차 · 일요일 브런치</p></div>
+  <div class="notice" style="margin-bottom:24px">1안(16:30 공연) → 18:30~ 회식 &nbsp;／&nbsp; 2안(19:30 공연) → 21:30~ 회식<br>하우스오브댄싱워터 티켓 소지 시 시티오브드림즈 레스토랑 20% 할인 + MOP200 쇼핑 혜택.</div>
+
+  <!-- 중식 -->
+  <div class="cuisine-label">🥢 중식 Chinese</div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <img class="place-photo" src="https://lh3.googleusercontent.com/place-photos/AL8-SNF-1s6ZY_gbw5jYfWxSkpkkMOsD_RohVg6cvCZwb5GTdKAeyD0juQHJ2_jyJQT5h_eS-9I90JgweA4dnZZCkgYeBZMasibOE_MSiFC0QSopbZJOO8HvRGy-V9ApR52Ec3_FAt6q6FBTWm9wEQ=s800-w800-h500" alt="북방관" onerror="this.style.display='none'">
+    <div class="place-head">
+      <div><div class="place-name">북방관 (North) ⭐ 추천</div><div class="place-type">중국 북방 요리 · 베네치안 마카오 1층 · 코타이</div></div>
+      <div class="place-price">HK$200–350/인</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">가성비</span><span class="bg rec">맥주 안주</span><span class="bg rec">늦게까지</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 매일 11:00 AM – 11:00 PM</span>
+        <span>📍 Shop 1015, Level 1, The Venetian Macao, Cotai</span>
+        <span>📞 +853 8118 9980</span>
+      </div>
+      <strong>개요</strong> 탄탄면·수타면·가지튀김·만두 등 술 안주로 딱인 메뉴가 많고 오픈 키친 퍼포먼스로 분위기도 살아남. 맥주와 환상 궁합. 늦은 시간까지 영업해서 2안(21:30~) 회식에 특히 적합.<br><br>
+      <strong>비고</strong> 베네치안 카지노 건물 내 위치. 브로드웨이 호텔 도보 10분. 일부 메뉴 매울 수 있음. 단체 예약 권장.<br><br>
+      <strong>시그니처 메뉴</strong> 탄탄면, 가지 튀김, 수타 왕만두, 마파두부<br>
+      <a class="place-maps" href="https://maps.google.com/?cid=16439838980378035686" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <img class="place-photo" src="https://lh3.googleusercontent.com/place-photos/AL8-SNHOho0GunBb8N7FF0-9WwARUBcj2aMcBp3G23XHURxC2J5O2aa1PmH_3PsW28Rn4oeRyHVjq__hXs2xaduaUPRLPb9HlQX7gya5eCJrQkBp3p98Hm4S8UWBoO7OcZ-Yji_EUNGqkjti2QwUFIOYafr6=s800-w800-h500" alt="셍창" onerror="this.style.display='none'">
+    <div class="place-head">
+      <div><div class="place-name">셍창 식당 (Seng Cheong)</div><div class="place-type">광둥·게죽 전문 · 타이파 빌리지</div></div>
+      <div class="place-price">HK$250–400/인</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">로컬 명소</span><span class="bg rec">해산물</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 매일 11:30 AM – 11:30 PM</span>
+        <span>📍 24 Rua do Cunha, Taipa, Macau</span>
+        <span>📞 +853 2882 5323</span>
+      </div>
+      <strong>개요</strong> 1960년 창업한 타이파 로컬 게죽 전문점. 골든 크랩 콘지(꽃게죽)가 시그니처로 마카오 대표 로컬 음식 경험. 탤런트들이 즐겨 찾아 유명해진 곳.<br><br>
+      <strong>비고</strong> 타이파 빌리지 위치 (공연 후 택시 15분). 13명 단체는 사전 예약 필수.<br><br>
+      <strong>시그니처 메뉴</strong> 골든 크랩 콘지(게죽), 게살 스파게티, 황금빛 모래 새우<br>
+      <a class="place-maps" href="https://maps.google.com/?q=Seng+Cheong+Restaurant+24+Rua+do+Cunha+Taipa+Macau" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <!-- 마카니즈 -->
+  <div class="cuisine-label">🇲🇴 마카니즈 Macanese</div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <img class="place-photo" src="https://lh3.googleusercontent.com/places/ANXAkqFCLYBD45NTvBXR5C4QdLLYm2Lpfp1-IoxIBUxc2E04uYIvAqi1kH0OMGo_DUMW6WltTF3ZM_NLAHxWv4AmDFezMGmBVCC5baI=s800-w800-h500" alt="Dumbo" onerror="this.style.display='none'">
+    <div class="place-head">
+      <div><div class="place-name">덤보 (Dumbo)</div><div class="place-type">마카니즈 퓨전 · 타이파</div></div>
+      <div class="place-price">HK$150–250/인</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">한국인 인기</span><span class="bg rec">가성비</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 매일 11:50 AM – 11:00 PM</span>
+        <span>📍 Rua do Regedor 312, Taipa, Macau</span>
+        <span>📞 +853 2882 7888</span>
+      </div>
+      <strong>개요</strong> 합리적인 가격에 다양한 마카니즈 음식을 맛볼 수 있는 곳. 한국인 관광객에게 검증된 식당. 로스티드 치킨·해산물 리조또·아프리칸 치킨이 인기. 부담 없이 다 같이 즐기기 좋음.<br><br>
+      <strong>비고</strong> 마카니즈 = 포르투갈+중국 퓨전 마카오 고유 음식. 단체 수용 가능하나 사전 예약 권장.<br><br>
+      <strong>시그니처 메뉴</strong> 로스티드 치킨, 토마토소스 해산물 리조또, 아프리칸 치킨<br>
+      <a class="place-maps" href="https://maps.google.com/?q=Dumbo+Restaurant+Taipa+Macau" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">A Petisqueira <span style="font-size:10px;color:var(--opt1);">미슐랭 빕구르망</span></div><div class="place-type">마카니즈·포르투갈 · 타이파 빌리지</div></div>
+      <div class="place-price">HK$200–350/인</div>
+    </div>
+    <div class="place-meta"><span class="bg star">빕구르망</span><span class="bg rec">가성비</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 매일 12:00–4:00 PM, 6:00–11:00 PM</span>
+        <span>📍 15 Rua de São Joao, Taipa, Macau</span>
+        <span>📞 +853 2882 5354</span>
+      </div>
+      <strong>개요</strong> 미슐랭 빕구르망 선정 — 가성비 좋은 맛집에 주는 인증. 정통 마카니즈 음식을 합리적 가격에. 바칼라우(염장 대구), 아프리칸 치킨 시그니처. 포르투갈 와인과 완벽한 궁합.<br><br>
+      <strong>비고</strong> 작은 식당이라 13명은 사전 예약 필수 (수용 가능 여부 확인 필요). 타이파 빌리지 위치 (택시 15분).<br><br>
+      <strong>시그니처 메뉴</strong> 바칼라우(포르투갈식 염장 대구), 아프리칸 치킨, 세하두라(디저트)<br>
+      <a class="place-maps" href="https://maps.google.com/?q=A+Petisqueira+Taipa+Macau" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <!-- 포르투갈식 -->
+  <div class="cuisine-label">🇵🇹 포르투갈식 Portuguese</div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">A Lorcha <span style="font-size:10px;color:var(--opt1);">미슐랭 추천</span></div><div class="place-type">정통 포르투갈 · 마카오 반도 아마사원 근처</div></div>
+      <div class="place-price">HK$250–400/인</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">미슐랭 추천</span><span class="bg rec">포르투갈 와인</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 수·금·토·일 12:30–3:00 PM, 6:30–10:30 PM / 화요일 휴무</span>
+        <span>📍 289 Rua do Almirante Sergio, Macau</span>
+        <span>📞 +853 2831 3193</span>
+      </div>
+      <strong>개요</strong> 미슐랭 가이드 추천 포르투갈 레스토랑. 오너·셰프 모두 포르투갈 출신으로 정통성 최고. 포르투갈 와인 리스트 풍부. 관광객·현지인 모두 높은 평가.<br><br>
+      <strong>비고</strong> 마카오 반도 위치 (공연 후 이동 20~25분). 1안(18:30 회식)에 여유롭게 이동 가능. 포르투갈 맥주 Super Bock도 꼭 경험. 화요일 휴무 주의.<br><br>
+      <strong>시그니처 메뉴</strong> 갈릭 클램, 바칼라우 코제(염장 대구 찜), 해산물 볶음밥<br>
+      <a class="place-maps" href="https://maps.google.com/?q=A+Lorcha+289+Rua+do+Almirante+Sergio+Macau" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">Restaurante Litoral <span style="font-size:10px;color:var(--opt1);">미슐랭 추천</span></div><div class="place-type">마카니즈·포르투갈 · 타이파</div></div>
+      <div class="place-price">HK$250–400/인</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">미슐랭 추천</span><span class="bg rec">쉐어링 메뉴</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 매일 11:30 AM–3:00 PM, 6:00–9:30 PM</span>
+        <span>📍 Rua do Regedor 53-57, Taipa, Macau</span>
+        <span>📞 +853 2882 5255</span>
+      </div>
+      <strong>개요</strong> 미슐랭 추천 마카니즈 레스토랑. 포르투갈·마카니즈 클래식을 쉐어링 사이즈로 제공해 단체 회식에 딱. 노출 나무 트러스 아늑한 인테리어.<br><br>
+      <strong>비고</strong> 타이파 위치 (공연 후 택시 15분). 단체 예약 필수. Carne Alentejana(돼지+조개)가 특히 유명.<br><br>
+      <strong>시그니처 메뉴</strong> Carne Alentejana(돼지·조개), 아프리칸 치킨, 세하두라<br>
+      <a class="place-maps" href="https://maps.google.com/?q=Restaurante+Litoral+Taipa+Macau" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <!-- 회식 외 가볼만한 식당 -->
+  <div class="cuisine-label">🍴 회식 외 가볼만한 식당</div>
+  <div class="notice" style="margin-bottom:12px;font-size:11px;">자유 시간, 소그룹 식사, 또는 격식 있는 자리에 추천.</div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">The Eight (八) <span style="font-size:10px;color:var(--opt1);">미슐랭 ⭐⭐</span></div><div class="place-type">광둥 파인다이닝 · 그랜드 리스보아 · 마카오 반도</div></div>
+      <div class="place-price">HK$600–900/인</div>
+    </div>
+    <div class="place-meta"><span class="bg star">미슐랭 ⭐⭐</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 화–일 11:30 AM–3:00 PM, 6:00–10:00 PM / 월요일 휴무</span>
+        <span>📍 2F, Grand Lisboa Hotel, Macau</span>
+        <span>📞 +853 8803 7788</span>
+      </div>
+      <strong>개요</strong> 마카오 랜드마크 미슐랭 2스타 광둥 파인다이닝. 화려한 중국풍 인테리어. 전통 광둥 요리의 정수.<br><br>
+      <strong>비고</strong> 드레스코드 스마트 캐주얼. 마카오 반도 (택시 20분). 단체 예약 4주 전 필수. 월요일 휴무.<br><br>
+      <strong>시그니처 메뉴</strong> 베이징덕, 전복 딤섬, 광둥식 구이 코스<br>
+      <a class="place-maps" href="https://maps.google.com/?cid=13939889322730497331" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">Feng Wei Ju (豐味居) <span style="font-size:10px;color:var(--opt1);">미슐랭 ⭐⭐</span></div><div class="place-type">쓰촨 파인다이닝 · StarWorld Hotel · 마카오 반도</div></div>
+      <div class="place-price">HK$500–700/인</div>
+    </div>
+    <div class="place-meta"><span class="bg star">미슐랭 ⭐⭐</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 매일 12:00–3:00 PM, 6:00–11:00 PM</span>
+        <span>📍 5F, StarWorld Hotel, Macau</span>
+        <span>📞 +853 8290 8668</span>
+      </div>
+      <strong>개요</strong> 미슐랭 2스타 쓰촨 요리. 마라·고추기름 자극적 요리가 맥주·바이주와 잘 맞음. 가격 대비 임팩트 큰 옵션.<br><br>
+      <strong>비고</strong> 매운 음식 못 드시는 분 사전 체크 필요. 마카오 반도 (택시 20분). 단체 예약 필수.<br><br>
+      <strong>시그니처 메뉴</strong> 수이주위(물에 삶은 생선), 마라훠궈, 쓰촨 탕수육<br>
+      <a class="place-maps" href="https://maps.google.com/?cid=5454585712387572023" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">Zi Yat Heen (紫逸軒) <span style="font-size:10px;color:var(--opt1);">미슐랭 ⭐</span></div><div class="place-type">광둥 딤섬·코스 · 포시즌스 마카오 · 코타이</div></div>
+      <div class="place-price">HK$400–600/인</div>
+    </div>
+    <div class="place-meta"><span class="bg star">미슐랭 ⭐</span><span class="bg rec">코타이</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 월–토 12:00–2:30 PM, 6:00–10:30 PM / 일 11:30 AM–3:00 PM, 6:00–10:30 PM</span>
+        <span>📍 Four Seasons Hotel Macau, Cotai Strip</span>
+        <span>📞 +853 2881 8818</span>
+      </div>
+      <strong>개요</strong> 코타이 내 미슐랭 1스타 광둥 요리. 공연 후 이동 가장 편리한 고급 식당. 크리스피 치킨·딤섬 코스 시그니처.<br><br>
+      <strong>비고</strong> 포시즌스 호텔 내. 공연 후 택시 10분. 단체 예약 필수.<br><br>
+      <strong>시그니처 메뉴</strong> 크리스피 치킨, 하가우(새우 딤섬), 광둥식 코스<br>
+      <a class="place-maps" href="https://maps.google.com/?cid=2116139371841089945" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">António <span style="font-size:10px;color:var(--opt1);">미슐랭 ⭐⭐</span></div><div class="place-type">정통 포르투갈 파인다이닝 · 타이파 빌리지</div></div>
+      <div class="place-price">HK$400–600/인</div>
+    </div>
+    <div class="place-meta"><span class="bg star">미슐랭 ⭐⭐</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 매일 11:00 AM – 10:00 PM</span>
+        <span>📍 Rua dos Clerigos 7, Old Taipa Village, Macau</span>
+        <span>📞 +853 2888 8668</span>
+      </div>
+      <strong>개요</strong> 포르투갈 출신 오너셰프 운영. 200종 이상 포르투갈 와인 리스트. 마카오 최정상 포르투갈 파인다이닝.<br><br>
+      <strong>비고</strong> 타이파 빌리지 위치 (택시 15분). 예약 필수, 조기 마감. 스마트 캐주얼 권장.<br><br>
+      <strong>시그니처 메뉴</strong> 포르투갈식 새우커리, 바칼라우, 포르투갈식 스테이크<br>
+      <a class="place-maps" href="https://maps.google.com/?cid=6069316082500052466" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <!-- 2차 장소 -->
+  <div class="cuisine-label">🍺 2차 장소</div>
+
+  <!-- 브로드웨이 푸드스트리트 소개 -->
+  <div class="notice" style="margin-bottom:12px;font-size:12px;line-height:1.8;">
+    🏠 <strong>브로드웨이 푸드스트리트</strong> — 숙소 바로 앞. 회식 장소가 어디든 2차는 여기로 귀환하면 됨. 밤늦게까지 라이브 밴드에 야외 분위기 좋음.
+  </div>
+
+  <div class="cuisine-label" style="margin-top:0;">🎸 브로드웨이 푸드스트리트 Broadway Food Street</div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">The Roadhouse Macau ⭐ 강력추천</div><div class="place-type">록 바 · 라이브 밴드 · 브로드웨이 푸드스트리트 끝자락</div></div>
+      <div class="place-price">맥주 HK$60–90</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">숙소 바로 앞</span><span class="bg rec">라이브 밴드 매일 9PM~</span><span class="bg rec">새벽 2시까지</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 매일 6PM–2AM (금 5AM까지)</span>
+        <span>📍 Broadway Food Street E-G016-G019, Broadway Macau · 호텔 정문에서 도보 1분</span>
+        <span>📞 +853 2875 2945</span>
+      </div>
+      <strong>개요</strong> 브로드웨이 푸드스트리트 2차의 정답. 기타·드럼·베이스 라이브 밴드가 매일 밤 9시부터. 벽면 가득한 록 뮤직 메모리아빌리아, 서명 기타들. 실내+야외석 모두 있고 13명 단체로 시끌벅적하게 마시기 딱인 분위기. 안주는 버거·피자·나초·BBQ립.<br><br>
+      <strong>비고</strong> 마카오 최고의 2차 바로 손꼽히며 라이브 밴드는 팝·록 중심으로 매일 밤 9시~2시 운행. 스포츠 중계도 됨. 회식 후 어디서 오든 호텔 복귀 루트에 있어 무조건 들를 수 있음.<br>
+      <a class="place-maps" href="https://maps.google.com/?q=The+Roadhouse+Macau+Broadway+Food+Street" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">Goa Nights ⭐ 추천</div><div class="place-type">인도·고아식 크래프트 칵테일 바 · 브로드웨이 푸드스트리트</div></div>
+      <div class="place-price">칵테일 MOP100–150 · 인도 안주 MOP80~</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">숙소 바로 앞</span><span class="bg rec">아시아 50대 바 선정</span><span class="bg rec">핸드크래프트 칵테일</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 화–일 18:00–01:00 / 월 휴무</span>
+        <span>📍 Shop E-G020-G021, Broadway Food Street, Broadway Macau · 로드하우스 바로 옆</span>
+        <span>📞 +853 2856 7819</span>
+      </div>
+      <strong>개요</strong> 2019년 마카오 최고 바 수상, 아시아 50대 바 리스트 진입, 2025년 Tatler 마카오 베스트 20 바 선정. 인도·고아 영향을 받은 크래프트 칵테일이 시그니처. 2024년 8월 타이파 빌리지에서 브로드웨이로 이전해 규모 업그레이드. 2,000sqft 규모로 야외석·프라이빗 다이닝룸 구비.<br><br>
+      <strong>비고</strong> 로드하우스 옆이라 두 곳 번갈아 가며 마시기 좋음. 월요일 휴무 주의. 인도 안주(탄두리·치킨 티카 등)가 칵테일과 잘 어울림.<br>
+      <a class="place-maps" href="https://maps.google.com/?cid=2638711359249802635" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">Duffy's Irish Pub</div><div class="place-type">아이리시 펍 · 브로드웨이 푸드스트리트</div></div>
+      <div class="place-price">맥주 HK$70–90</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">숙소 바로 앞</span><span class="bg rec">기네스 생맥주</span><span class="bg rec">로드하우스 바로 옆</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>📍 Broadway Food Street C-GO02–GO04, Broadway Macau</span>
+        <span>📞 +853 2884 5212</span>
+      </div>
+      <strong>개요</strong> 로드하우스 바로 옆 아이리시 펍. 기네스 생맥주 포함 드래프트 비어 다양. 해피아워 있음. 로드하우스 ↔ 고아 나이츠 ↔ 더피스 삼각편대로 브로드웨이 푸드스트리트를 왔다갔다 하는 게 정석 코스.<br>
+      <a class="place-maps" href="https://maps.google.com/?q=Duffys+Irish+Pub+Broadway+Macau" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="cuisine-label">🌃 코타이 · 갤럭시 주변</div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">China Rouge</div><div class="place-type">클럽·라운지 · 갤럭시 마카오 · 스카이브릿지 연결</div></div>
+      <div class="place-price">HK$150–300</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">브로드웨이 도보 연결</span><span class="bg rec">라이브 밴드·DJ</span><span class="bg rec">프라이빗 부스</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 화–목·일 9PM–2AM / 금·토 9PM–3AM / 월 휴무</span>
+        <span>📍 G/F, Galaxy Macau, Cotai · 브로드웨이 스카이브릿지 경유 도보 10분</span>
+        <span>📞 +853 8883 2221</span>
+      </div>
+      <strong>개요</strong> 클럽 분위기로 업그레이드하고 싶을 때. 라이브 밴드·DJ. 단체 프라이빗 부스 예약 가능. 갤럭시 내 위치라 도보로 이동 가능.<br><br>
+      <strong>비고</strong> 9시 이후 오픈이라 2안(21:30 회식 후) 타이밍 딱 맞음. 월요일 휴무 주의.<br>
+      <a class="place-maps" href="https://maps.google.com/?cid=11242724665506093339" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">Old Taipa Tavern (OTT)</div><div class="place-type">로컬 크래프트 비어 펍 · 타이파 빌리지</div></div>
+      <div class="place-price">맥주 HK$70–100</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">로컬 명소</span><span class="bg rec">크래프트 비어 27종</span><span class="bg rec">스포츠 중계</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 월–금 3PM–2:30AM / 토·일 1PM–2:30AM</span>
+        <span>📍 21 Rua dos Negociantes, Taipa Village · 택시 10~15분</span>
+        <span>📞 +853 2882 5221</span>
+      </div>
+      <strong>개요</strong> 타이파 빌리지 현지인·주재원 단골 펍. 크래프트 비어 27종, 매주 월요일 다트 대회. 회식이 타이파 쪽이면 2차로 바로 연결 가능. 13명 수용 가능한 규모.<br>
+      <a class="place-maps" href="https://maps.google.com/?q=Old+Taipa+Tavern+Taipa+Village+Macau" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">카지노</div><div class="place-type">베네치안 · 갤럭시 · 24시간</div></div>
+      <div class="place-price">자유 (음료 무료)</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">24시간</span><span class="bg rec">음료 무료</span><span class="bg rec">도보 10분</span></div>
+    <div class="place-body">
+      <strong>개요</strong> 24시간 운영. 게임하면 음료 무료. 블랙잭·바카라·슬롯. 브로드웨이에서 베네치안·갤럭시 도보 10분.<br><br>
+      <strong>비고</strong> 음료 무료라 2차 비용 절약 가능. 여권 지참 권장.<br>
+      <a class="place-maps" href="https://maps.google.com/?cid=16439838980378035686" target="_blank">📍 베네치안 Google Maps</a>
+    </div>
+  </div>
+
+  <!-- 일요일 아침 식사 — 맨 아래 -->
+  <div class="cuisine-label">🌅 일요일 아침 식사</div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">Tim Ho Wan (添好運) ⭐ 추천</div><div class="place-type">미슐랭 딤섬 · 브로드웨이 푸드스트리트</div></div>
+      <div class="place-price">HK$100–180/인</div>
+    </div>
+    <div class="place-meta"><span class="bg star">미슐랭 선정</span><span class="bg rec">숙소 바로 앞</span><span class="bg rec">09:00 오픈</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 매일 09:00–21:00</span>
+        <span>📍 Broadway Food Street, Broadway Macau · 체크아웃 후 도보 1분</span>
+        <span>📞 +853 2884 2068</span>
+      </div>
+      <strong>개요</strong> '세계에서 가장 저렴한 미슐랭 레스토랑'으로 유명한 홍콩 딤섬 전문점. 마카오 베네치안·론도너·브로드웨이 3개 지점 운영 중, 그중 브로드웨이점이 숙소 바로 앞. 하가우(새우 만두)·차슈바오(BBQ 돼지 구운 번)·창펀(쌀국수 롤)이 시그니처.<br><br>
+      <strong>비고</strong> 체크아웃 후 짐 맡기고 바로 이동 가능. 오픈 직후 방문하면 대기 없이 바로 착석 가능. 13명은 분산해서 여러 테이블 이용.<br>
+      <a class="place-maps" href="https://maps.google.com/?q=Tim+Ho+Wan+Broadway+Food+Street+Macau" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">Tai Lei Loi Kei (大利來記)</div><div class="place-type">마카오 돼지고기 버거빵 원조 · 타이파 빌리지</div></div>
+      <div class="place-price">MOP55/인</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">마카오 대표 로컬 음식</span><span class="bg rec">Anthony Bourdain 추천</span><span class="bg rec">08:00 오픈</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 매일 08:00–18:00</span>
+        <span>📍 35 Rua Correia da Silva, Taipa Village · 브로드웨이 호텔 택시 5분</span>
+        <span>📞 +853 2882 7150</span>
+      </div>
+      <strong>개요</strong> 1968년부터 이어온 타이파 빌리지 돼지고기 버거빵(주파바오, Pork Chop Bun) 전문점. 앤서니 부르댕이 방문해 극찬한 곳으로도 유명. 바삭하게 구운 통뼈 돼지고기를 포르투갈식 빵에 넣은 마카오 고유의 길거리 음식. 플레인 또는 파인애플 번 선택 가능.<br><br>
+      <strong>비고</strong> 타이파 빌리지 산책 겸 방문하기 좋음. 테이크아웃 지점(Rua dos Clerigos)도 있어서 들고 걸어다니며 먹어도 됨. 개당 MOP55로 부담 없음.<br>
+      <a class="place-maps" href="https://maps.google.com/?q=Tai+Lei+Loi+Kei+35+Rua+Correia+da+Silva+Taipa+Macau" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+  <div class="place-card" onclick="this.classList.toggle('open')">
+    <div class="place-head">
+      <div><div class="place-name">Broadway Kitchen</div><div class="place-type">뷔페식 조식 · 브로드웨이 호텔 내</div></div>
+      <div class="place-price">MOP108/인 (세트 기준)</div>
+    </div>
+    <div class="place-meta"><span class="bg rec">호텔 내부</span><span class="bg rec">07:00 오픈</span><span class="bg rec">동서양 선택 가능</span></div>
+    <div class="place-body">
+      <div class="place-info">
+        <span>🕐 조식 07:00–11:30 (라스트오더 11:00)</span>
+        <span>📍 Broadway Macau, G/F · 호텔 내부</span>
+      </div>
+      <strong>개요</strong> 브로드웨이 호텔 내 뷔페식 조식 레스토랑. 동양식(딤섬·죽·볶음밥)·서양식(오믈렛·빵·요거트) 중 메인 하나 선택 + 샐러드바·과일·시리얼·빵·음료 셀프서비스 구성. MOP108 세트 기준으로 코타이 지역 기준 합리적인 가격.<br><br>
+      <strong>비고</strong> 가장 이동 없이 편리한 선택. 공항 셔틀 시간 맞추기 쉽고 단체가 함께 앉기 좋음. 사전 예약 없이 이용 가능하지만 단체는 미리 연락 권장.<br>
+      <a class="place-maps" href="https://maps.google.com/?q=Broadway+Kitchen+Broadway+Macau" target="_blank">📍 Google Maps에서 보기</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- 예산 -->
+<div class="day-section" id="budget">
+  <div class="sec-head"><h2>예산 시뮬레이션</h2><p>13명 기준</p></div>
+  <table class="budget-t">
+    <tr><td class="lbl">하우스 오브 댄싱 워터 (Signature석 기준)</td><td class="amt">약 167만원</td></tr>
+    <tr><td class="lbl">금요일 단체 회식 (HK$400–600/인)</td><td class="amt">약 100–140만원</td></tr>
+    <tr><td class="lbl">일요일 브런치</td><td class="amt">약 30–60만원</td></tr>
+    <tr><td class="lbl">교통 · 간식 · 예비</td><td class="amt">약 30만원</td></tr>
+    <tr><td class="lbl">합계</td><td class="amt">약 330–400만원</td></tr>
+  </table>
+  <div class="notice">
+    ✅ &nbsp;500만원 예산 내 100만원+ 여유<br>
+    ✅ &nbsp;Gallery석 선택 시 약 37만원 추가 절감<br>
+    ⚠️ &nbsp;하우스오브댄싱워터 — 성수기 금요일, 사전 예약 필수<br>
+    ⚠️ &nbsp;미슐랭 레스토랑 단체 예약 — 최소 3–4주 전 권장
+  </div>
+</div>
+
+<!-- 지도 -->
+<div class="day-section" id="map">
+  <div class="sec-head"><h2>장소 지도 · 이동 안내</h2><p>브로드웨이 호텔 기준 전체 동선</p></div>
+
+  <!-- 지도 먼저 -->
+  <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line);">🗺 전체 장소 지도</div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px;font-size:11px;color:var(--ink3);">
+    <span>📍 숙소</span><span>🎪 공연장</span><span>🍽 회식 추천</span><span>🍻 2차 바</span>
+  </div>
+  <iframe width="100%" height="500"
+    style="border:1px solid var(--line2);border-radius:8px;display:block;"
+    loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+    src="https://www.google.com/maps/embed/v1/search?key=AIzaSyA0Um4SA-lQntd7IcArPPYwMkbCJFA57YU&q=Broadway+Macau,City+of+Dreams+Macau,North+Restaurant+Venetian+Macau,Seng+Cheong+Restaurant+Taipa,Dumbo+Restaurant+Taipa+Macau,A+Petisqueira+Taipa+Macau,A+Lorcha+Macau,Restaurante+Litoral+Taipa&center=22.158,113.557&zoom=13">
+  </iframe>
+
+  <!-- 장소별 바로가기 -->
+  <div style="margin-top:20px;">
+    <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line);">📍 장소별 Google Maps 바로가기</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+      <div style="grid-column:1/-1;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);margin:8px 0 4px;">숙소 · 공연</div>
+      <a href="https://maps.google.com/?cid=16622329831663230928" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);">
+        <div style="font-size:12px;font-weight:500;">📍 브로드웨이 호텔</div><div style="font-size:11px;color:var(--ink3);margin-top:2px;">숙소 · Cotai</div>
+      </a>
+      <a href="https://maps.google.com/?cid=9835731049318005022" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);">
+        <div style="font-size:12px;font-weight:500;">🎪 하우스 오브 댄싱 워터</div><div style="font-size:11px;color:var(--ink3);margin-top:2px;">공연 · City of Dreams</div>
+      </a>
+      <div style="grid-column:1/-1;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);margin:8px 0 4px;">🍽 회식 추천</div>
+      <a href="https://maps.google.com/?cid=16439838980378035686" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);">
+        <div style="font-size:12px;font-weight:500;">🍽 북방관 (North)</div><div style="font-size:11px;color:var(--ink3);margin-top:2px;">중식 · 베네치안 · HK$200–350/인</div>
+      </a>
+      <a href="https://maps.google.com/?q=Seng+Cheong+Restaurant+24+Rua+do+Cunha+Taipa+Macau" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);">
+        <div style="font-size:12px;font-weight:500;">🍽 셍창 식당</div><div style="font-size:11px;color:var(--ink3);margin-top:2px;">광둥·게죽 · 타이파 · HK$250–400/인</div>
+      </a>
+      <a href="https://maps.google.com/?q=Dumbo+Restaurant+Taipa+Macau" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);">
+        <div style="font-size:12px;font-weight:500;">🍽 덤보 (Dumbo)</div><div style="font-size:11px;color:var(--ink3);margin-top:2px;">마카니즈 · 타이파 · HK$150–250/인</div>
+      </a>
+      <a href="https://maps.google.com/?q=A+Petisqueira+Taipa+Macau" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);">
+        <div style="font-size:12px;font-weight:500;">🍽 A Petisqueira <span style="font-size:10px;color:var(--opt1);">빕구르망</span></div><div style="font-size:11px;color:var(--ink3);margin-top:2px;">마카니즈 · 타이파 · HK$200–350/인</div>
+      </a>
+      <a href="https://maps.google.com/?q=A+Lorcha+Macau" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);">
+        <div style="font-size:12px;font-weight:500;">🍽 A Lorcha <span style="font-size:10px;color:var(--opt1);">미슐랭 추천</span></div><div style="font-size:11px;color:var(--ink3);margin-top:2px;">포르투갈 · 마카오 반도 · HK$250–400/인</div>
+      </a>
+      <a href="https://maps.google.com/?q=Restaurante+Litoral+Taipa+Macau" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);">
+        <div style="font-size:12px;font-weight:500;">🍽 Restaurante Litoral <span style="font-size:10px;color:var(--opt1);">미슐랭 추천</span></div><div style="font-size:11px;color:var(--ink3);margin-top:2px;">마카니즈 · 타이파 · HK$250–400/인</div>
+      </a>
+      <div style="grid-column:1/-1;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);margin:8px 0 4px;">🍻 2차 바</div>
+      <a href="https://maps.google.com/?cid=2638711359249802635" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);">
+        <div style="font-size:12px;font-weight:500;">🍻 Goa Nights</div><div style="font-size:11px;color:var(--ink3);margin-top:2px;">칵테일 바 · 브로드웨이</div>
+      </a>
+      <a href="https://maps.google.com/?cid=11242724665506093339" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);">
+        <div style="font-size:12px;font-weight:500;">🍻 China Rouge</div><div style="font-size:11px;color:var(--ink3);margin-top:2px;">클럽·라운지 · 갤럭시</div>
+      </a>
+      <a href="https://maps.google.com/?cid=14963318935391536851" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);">
+        <div style="font-size:12px;font-weight:500;">🍻 38 라운지 바</div><div style="font-size:11px;color:var(--ink3);margin-top:2px;">루프탑 · 알티라 38F</div>
+      </a>
+      <a href="https://maps.google.com/?cid=7020312242073092580" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);">
+        <div style="font-size:12px;font-weight:500;">🍻 Macallan Whisky Bar</div><div style="font-size:11px;color:var(--ink3);margin-top:2px;">위스키 바 · 그랜드 하얏트</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 셔틀버스 노선 — 맨 아래 -->
+  <div style="margin-top:32px;">
+    <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line);">🚌 이동 수단 안내</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+
+      <!-- 노선 1: 공항 → 브로드웨이 -->
+      <div style="border:1px solid var(--line2);border-radius:6px;overflow:hidden;">
+        <div style="background:var(--surface);padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);">
+          <span style="font-size:15px;">✈️ → 🏨</span>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:500;">마카오 공항 → 브로드웨이 호텔</div>
+            <div style="font-size:11px;color:var(--ink3);margin-top:1px;">무료 셔틀 · 약 15~20분 · 수시 운행</div>
+          </div>
+          <span class="move-pill">🚌 무료</span>
+        </div>
+        <div style="padding:10px 14px;font-size:12px;color:var(--ink2);line-height:1.85;">
+          <strong>탑승 위치</strong> — 공항 1층 도착 출구 나오면 우측 호텔 셔틀 승강장. <span style="background:#f0f6f2;color:var(--opt1);padding:1px 6px;border-radius:3px;font-size:11px;font-weight:500;">Galaxy Macau / Broadway Hotel</span> 표지판 확인 후 탑승.<br>
+          <strong>운행</strong> — 약 20~30분 간격 수시 운행. 별도 예약 불필요.
+        </div>
+      </div>
+
+      <!-- 노선 2: 브로드웨이 → 시티오브드림즈 -->
+      <div style="border:1px solid var(--line2);border-radius:6px;overflow:hidden;">
+        <div style="background:var(--surface);padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);">
+          <span style="font-size:15px;">🏨 → 🎭</span>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:500;">브로드웨이 호텔 → 시티오브드림즈 (공연장)</div>
+            <div style="font-size:11px;color:var(--ink3);margin-top:1px;">택시 이용 · 약 10분 · MOP40–50/대</div>
+          </div>
+          <span class="move-pill">🚕 택시</span>
+        </div>
+        <div style="padding:10px 14px;font-size:12px;color:var(--ink2);line-height:1.85;">
+          시티오브드림즈 직행 셔틀 없음. <strong>호텔 정문 앞 택시 승강장에서 즉시 탑승 가능.</strong> 13명 → 3~4대 분승.<br>
+          <strong>목적지 전달용</strong> — <span style="background:#faf5ec;color:var(--gold);padding:1px 6px;border-radius:3px;font-size:11px;">City of Dreams / 新濠天地</span> 기사에게 보여주면 됨.
+        </div>
+      </div>
+
+      <!-- 노선 3: 시티오브드림즈 → 브로드웨이 -->
+      <div style="border:1px solid var(--line2);border-radius:6px;overflow:hidden;">
+        <div style="background:var(--surface);padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line);">
+          <span style="font-size:15px;">🎭 → 🏨</span>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:500;">시티오브드림즈 → 브로드웨이 호텔 (복귀)</div>
+            <div style="font-size:11px;color:var(--ink3);margin-top:1px;">택시 약 10분 또는 도보 약 20분</div>
+          </div>
+          <span class="move-pill">🚕 택시 or 🚶 도보</span>
+        </div>
+        <div style="padding:10px 14px;font-size:12px;color:var(--ink2);line-height:1.85;">
+          <strong>택시</strong> — 시티오브드림즈 정문 앞. 심야에도 대기 짧음. MOP40–50/대, 약 10분.<br>
+          <strong>도보</strong> — 시티오브드림즈 → 베네치안 → 브로드웨이 방향 약 20~25분. 북방관 회식 후 숙소 귀환 시 활용 가능.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- 꿀팁 · 날씨 -->
+<div class="day-section" id="info">
+  <div class="sec-head"><h2>정보</h2><p>마카오 처음이라면 꼭 읽어두세요</p></div>
+
+  <style>
+    .info-block { margin-bottom: 20px; border: 1px solid var(--line2); border-radius: 8px; overflow: hidden; }
+    .info-block-head { background: var(--surface); padding: 12px 18px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--line); }
+    .info-block-icon { font-size: 20px; flex-shrink: 0; }
+    .info-block-title { font-size: 13px; font-weight: 600; color: var(--ink); }
+    .info-block-body { padding: 14px 18px; font-size: 12px; color: var(--ink2); line-height: 1.9; }
+    .info-block-body strong { color: var(--ink); font-weight: 600; }
+    .info-row { display: flex; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--line); align-items: flex-start; }
+    .info-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .info-row-label { font-size: 11px; font-weight: 600; color: var(--ink); min-width: 80px; padding-top: 1px; flex-shrink: 0; }
+    .info-row-val { font-size: 12px; color: var(--ink2); line-height: 1.75; }
+  </style>
+
+  <!-- 날씨 -->
+  <div class="info-block">
+    <div class="info-block-head">
+      <span class="info-block-icon">🌡️</span>
+      <div class="info-block-title">마카오 날씨 — 7월</div>
+    </div>
+    <div class="info-block-body">
+      <div class="info-row">
+        <div class="info-row-label">기온</div>
+        <div class="info-row-val">낮 최고 <strong>33–36°C</strong>, 밤에도 28°C 이상. 체감 온도는 40°C에 육박하는 경우도 있음.</div>
+      </div>
+      <div class="info-row">
+        <div class="info-row-label">습도</div>
+        <div class="info-row-val">평균 <strong>80–90%</strong>. 한국 여름보다 훨씬 끈적하고 무거운 공기. 실외 5분만 서 있어도 땀이 흐름.</div>
+      </div>
+      <div class="info-row">
+        <div class="info-row-label">실내 냉방</div>
+        <div class="info-row-val">카지노·공연장·쇼핑몰 냉방이 <strong>극강으로 강함</strong>. 밖은 찜통이지만 안에선 오히려 추울 수 있음. <strong>얇은 겉옷 필수</strong>. 특히 하우스 오브 댄싱 워터 공연장 냉방 셈.</div>
+      </div>
+      <div class="info-row">
+        <div class="info-row-label">태풍</div>
+        <div class="info-row-val">7월은 태풍 시즌. 출발 전 기상 체크 권장. 시그널 8 이상이면 모든 시설 운영 중단됨 (가능성 낮지만 참고).</div>
+      </div>
+      <div class="info-row">
+        <div class="info-row-label">복장 팁</div>
+        <div class="info-row-val">반팔·반바지 + <strong>얇은 카디건이나 맨투맨 하나</strong> 꼭 챙기기. 자외선 강하니 선크림 필수. 샌들보다 걷기 편한 신발 권장 (도보 이동 많음).</div>
+      </div>
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line);display:flex;gap:8px;flex-wrap:wrap;">
+        <a href="https://wttr.in/Macau" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--ink);text-decoration:none;border:1px solid var(--line2);padding:6px 12px;border-radius:4px;">🌐 wttr.in 실시간 날씨</a>
+        <a href="https://www.macaotourism.gov.mo/ko/weather" target="_blank" style="display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--ink);text-decoration:none;border:1px solid var(--line2);padding:6px 12px;border-radius:4px;">🌐 마카오 관광청 날씨</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 돈·결제 -->
+  <div class="info-block">
+    <div class="info-block-head">
+      <span class="info-block-icon">💳</span>
+      <div class="info-block-title">돈 · 결제</div>
+    </div>
+    <div class="info-block-body">
+      <div class="info-row">
+        <div class="info-row-label">화폐</div>
+        <div class="info-row-val"><strong>마카오 파타카(MOP)</strong>가 공식 화폐. 단, <strong>홍콩달러(HKD)도 대부분 어디서나 통용</strong>됨 (1:1로 취급하는 곳이 많음). 공식 환율은 1 HKD ≈ 1.03 MOP이라 HKD 쓰면 약간 손해지만 실생활에선 큰 차이 없음.</div>
+      </div>
+      <div class="info-row">
+        <div class="info-row-label">환전</div>
+        <div class="info-row-val">한국에서 <strong>HKD로 환전</strong>해 오는 게 가장 편리하고 환율 좋음. 인천공항 환전 가능. 현지에서는 카지노 환전소·시내 환전상 이용 가능하지만 수수료 확인 필요.</div>
+      </div>
+      <div class="info-row">
+        <div class="info-row-label">카드</div>
+        <div class="info-row-val">대형 호텔·레스토랑·쇼핑몰은 <strong>Visa·Mastercard 카드 결제 대부분 가능</strong>. 단, 소규모 로컬 식당·노점·택시는 현금 선호. 카지노 칩 구매는 현금만. <strong>현금 HKD를 넉넉히 준비</strong>하는 게 안전.</div>
+      </div>
+      <div class="info-row">
+        <div class="info-row-label">현금 비율</div>
+        <div class="info-row-val">전체 예산의 <strong>50–60% 정도를 현금</strong>으로 준비 권장. 택시·로컬 식당·팁·카지노 등 현금이 필요한 상황이 꽤 많음.</div>
+      </div>
+      <div class="info-row">
+        <div class="info-row-label">팁 문화</div>
+        <div class="info-row-val">대부분 <strong>서비스 차지 10% 포함</strong> 청구. 별도 팁 의무 없음. 고급 레스토랑에서 소액 팁을 놓는 경우는 있지만 강제 아님.</div>
+      </div>
+      <div class="info-row">
+        <div class="info-row-label">ATM</div>
+        <div class="info-row-val">브로드웨이 호텔·갤럭시 내 ATM에서 해외 카드로 현지 현금 인출 가능. 수수료 발생하므로 한국에서 미리 환전 권장.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 입국·출국 -->
+  <div class="info-block">
+    <div class="info-block-head">
+      <span class="info-block-icon">✈️</span>
+      <div class="info-block-title">입국 · 출국</div>
+    </div>
+    <div class="info-block-body">
+      <div class="info-row">
+        <div class="info-row-label">입국심사</div>
+        <div class="info-row-val">공항 규모가 작아 심사 자체는 빠른 편. 단 <strong>13명 단체 기준 30–60분</strong> 소요 예상. 입국 카드는 기내에서 미리 작성해두면 빠름.</div>
+      </div>
+      <div class="info-row">
+        <div class="info-row-label">공항 셔틀</div>
+        <div class="info-row-val">입국 후 <strong>1층 출구 → 우측 호텔 셔틀 승강장</strong>으로 이동. <strong style="background:#f0f6f2;color:var(--opt1);padding:1px 5px;border-radius:3px;">Galaxy Macau / Broadway Hotel</strong> 표지판 확인 후 탑승. 무료, 수시 운행, 예약 불필요. 약 15–20분 소요.</div>
+      </div>
+      <div class="info-row">
+        <div class="info-row-label">면세 쇼핑</div>
+        <div class="info-row-val">DFS 갤러리아(파리지앵 호텔 내)에서 쇼핑 후 <strong>공항 픽업</strong> 가능. 출국 당일 오전 구매해도 가능 (사전 확인 권장). 주류·화장품·담배 주요 품목.</div>
+      </div>
+      <div class="info-row">
+        <div class="info-row-label">카지노 입장</div>
+        <div class="info-row-val">카지노 입장 시 <strong>여권 지참 필수</strong>. 만 21세 미만 입장 불가. 내부 사진 촬영 금지. 슬리퍼·민소매 등 너무 캐주얼한 차림은 일부에서 제한.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 이동 -->
+  <div class="info-block">
+    <div class="info-block-head">
+      <span class="info-block-icon">🚕</span>
+      <div class="info-block-title">현지 이동</div>
+    </div>
+    <div class="info-block-body">
+      <div class="info-row">
+        <div class="info-row-label">택시 · 앱</div>
+        <div class="info-row-val">호텔 정문 앞에서 쉽게 잡힘. <strong>목적지를 한자로 적어 보여주는 게 가장 확실</strong> (기사 대부분 영어 잘 못함). 미터제, 기본요금 MOP19, 코타이 내 이동 MOP40–60 수준.<br><br>
+        앱 호출은 <strong>99택시 (九九的士)</strong> 사용 가능 — 구글플레이·앱스토어에서 다운로드 가능한 마카오 공식 택시 앱. 앱에서 목적지 입력하면 언어 장벽 없이 편리하게 이용 가능. 단 피크 타임엔 일반 택시 잡는 게 더 빠를 수 있음. <strong>우버·카카오택시는 서비스 없음.</strong></div>
+      </div>
+      <div class="info-row">
+        <div class="info-row-label">무료 셔틀</div>
+        <div class="info-row-val">브로드웨이·갤럭시·베네치안·파리지앵 등 대부분 리조트가 <strong>공항·페리터미널 간 무료 셔틀</strong> 운영. 호텔 로비 안내판 또는 프론트에서 시간표 확인.</div>
+      </div>
+      <div class="info-row">
+        <div class="info-row-label">도보</div>
+        <div class="info-row-val">브로드웨이 ↔ 갤럭시 <strong>스카이브릿지 도보 5분</strong>. 갤럭시 ↔ 베네치안 도보 10분. 단, <strong>7월 낮 야외 이동은 최소화</strong> 권장. 실내 경로 적극 활용.</div>
+      </div>
+      <div class="info-row">
+        <div class="info-row-label">통신</div>
+        <div class="info-row-val">한국 통신사 자동 로밍으로 대부분 사용 가능. 또는 공항에서 <strong>마카오·홍콩 데이터 유심</strong> 구매 (3–5일권 약 1만원대). 구글맵·번역앱 오프라인 저장 권장.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+<script>
+function setOpt(n,el){
+  document.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.o1').forEach(e=>e.style.display=n===1?'':'none');
+  document.querySelectorAll('.o2').forEach(e=>e.style.display=n===2?'':'none');
+}
+function go(id,el){
+  document.querySelectorAll('.day-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>
