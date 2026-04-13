@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마카오 워크샵 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafaf8;
+  --ink: #1a1916;
+  --ink2: #6b6960;
+  --ink3: #b0ada4;
+  --line: #e8e5df;
+  --line2: #d4d0c8;
+  --surface: #f3f0eb;
+  --opt1: #2a5c3f;
+  --opt2: #2c3e6b;
+  --gold: #8a6c2a;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--ink); font-family: 'Geist', sans-serif; font-size: 13px; line-height: 1.6; }
+.shell { max-width: 760px; margin: 0 auto; padding: 0 36px 64px; }
+
+.header { padding: 52px 0 36px; border-bottom: 1px solid var(--line2); margin-bottom: 36px; }
+.header-eyebrow { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink3); margin-bottom: 14px; }
+.header h1 { font-family: 'Instrument Serif', serif; font-size: 44px; font-weight: 400; line-height: 1.1; letter-spacing: -0.5px; }
+.header h1 em { font-style: italic; }
+.header-meta { display: flex; margin-top: 24px; border: 1px solid var(--line2); border-radius: 6px; overflow: hidden; width: fit-content; }
+.meta-item { padding: 9px 20px; border-right: 1px solid var(--line2); font-size: 11px; color: var(--ink2); }
+.meta-item:last-child { border-right: none; }
+.meta-item strong { color: var(--ink); font-weight: 500; display: block; font-size: 12px; }
+
+.opt-section { margin-bottom: 36px; }
+.opt-eyebrow { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); margin-bottom: 10px; }
+.opt-toggle { display: flex; border: 1px solid var(--line2); border-radius: 6px; overflow: hidden; width: fit-content; }
+.opt-btn { padding: 11px 28px; background: var(--bg); border: none; cursor: pointer; font-family: 'Geist', sans-serif; font-size: 12px; color: var(--ink2); border-right: 1px solid var(--line2); display: flex; align-items: center; gap: 12px; transition: all .15s; }
+.opt-btn:last-child { border-right: none; }
+.opt-btn.active { background: var(--ink); color: #fff; }
+.opt-btn .t { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 18px; }
+.opt-btn .d { font-size: 11px; line-height: 1.4; text-align: left; }
+
+.nav { display: flex; border-bottom: 1px solid var(--line2); margin-bottom: 40px; }
+.nav-btn { padding: 10px 0; margin-right: 28px; background: none; border: none; border-bottom: 2px solid transparent; font-family: 'Geist', sans-serif; font-size: 12px; color: var(--ink3); cursor: pointer; margin-bottom: -1px; transition: all .15s; white-space: nowrap; }
+.nav-btn.active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 500; }
+.nav-btn:hover:not(.active) { color: var(--ink2); }
+
+.day-section { display: none; }
+.day-section.active { display: block; }
+
+.sec-head { margin-bottom: 28px; }
+.sec-head h2 { font-family: 'Instrument Serif', serif; font-size: 24px; font-weight: 400; }
+.sec-head p { font-size: 12px; color: var(--ink3); margin-top: 4px; }
+
+.timeline { }
+.tl-row { display: grid; grid-template-columns: 80px 1fr; gap: 0 24px; padding-bottom: 24px; position: relative; }
+.tl-row::after { content: ''; position: absolute; left: 92px; top: 8px; bottom: 0; width: 1px; background: var(--line); }
+.tl-row:last-child::after { display: none; }
+.tl-time { font-size: 11px; color: var(--ink3); text-align: right; padding-top: 2px; line-height: 1.4; }
+.tl-body { padding-left: 22px; position: relative; }
+.tl-body::before { content: ''; position: absolute; left: -4px; top: 7px; width: 7px; height: 7px; border-radius: 50%; background: var(--line2); outline: 2px solid var(--bg); }
+.tl-row.key .tl-body::before { background: var(--ink); }
+.tl-row.show .tl-body::before { background: var(--opt1); }
+.tl-row.food .tl-body::before { background: var(--gold); }
+
+.tl-title { font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.4; }
+.tl-sub { font-size: 12px; color: var(--ink2); margin-top: 4px; line-height: 1.65; }
+
+.tag { font-size: 10px; padding: 2px 7px; border-radius: 3px; font-weight: 400; }
+.t-key { background: var(--ink); color: #fff; }
+.t-show { background: #e4ede8; color: var(--opt1); }
+.t-free { background: var(--surface); color: var(--ink3); }
+.t-food { background: #f5ede0; color: var(--gold); }
+
+.infobox { margin-top: 10px; padding: 12px 16px; background: var(--surface); border-radius: 5px; border-left: 2px solid var(--line2); }
+.infobox.g { border-left-color: var(--opt1); }
+.infobox.b { border-left-color: var(--opt2); }
+.infobox-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink3); margin-bottom: 5px; }
+.infobox p { font-size: 12px; color: var(--ink2); line-height: 1.7; }
+
+.cards { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.card { border: 1px solid var(--line); border-radius: 6px; overflow: hidden; transition: border-color .15s; cursor: pointer; }
+.card:hover { border-color: var(--line2); }
+.card.open { border-color: var(--ink2); }
+.card-h { display: flex; justify-content: space-between; align-items: flex-start; padding: 13px 16px; gap: 12px; }
+.card-l .n { font-size: 13px; font-weight: 500; }
+.card-l .s { font-size: 11px; color: var(--ink3); margin-top: 2px; }
+.card-r { text-align: right; flex-shrink: 0; }
+.card-r .p { font-size: 12px; font-weight: 500; color: var(--ink); }
+.bgs { display: flex; gap: 4px; margin-top: 4px; justify-content: flex-end; flex-wrap: wrap; }
+.bg { font-size: 10px; padding: 1px 6px; border-radius: 3px; border: 1px solid var(--line2); color: var(--ink3); }
+.bg.star { border-color: #c2dbc9; color: var(--opt1); background: #f0f6f2; }
+.bg.rec { border-color: #ddd4be; color: var(--gold); background: #faf5ec; }
+.card-b { display: none; padding: 12px 16px; font-size: 12px; color: var(--ink2); line-height: 1.7; border-top: 1px solid var(--line); }
+.card.open .card-b { display: block; }
+
+.pills-section { margin-bottom: 22px; }
+.pills-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink3); margin-bottom: 8px; }
+.pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.pill { font-size: 11px; padding: 4px 12px; border-radius: 4px; background: #fff; color: var(--ink2); border: 1px solid var(--line2); }
+
+.notice { padding: 14px 18px; border: 1px solid var(--line); border-radius: 6px; font-size: 12px; color: var(--ink2); line-height: 1.9; margin-top: 8px; background: var(--surface); }
+
+.budget-t { width: 100%; border-collapse: collapse; }
+.budget-t td { padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+.budget-t tr:last-child td { border-bottom: none; font-weight: 500; font-size: 14px; }
+.budget-t .lbl { color: var(--ink2); }
+.budget-t .amt { text-align: right; }
+.budget-t tr:last-child .amt { color: var(--opt1); }
+</style>
+</head>
+<body>
+<div class="shell">
+
+<div class="header">
+  <div class="header-eyebrow">부서 워크샵 · 마카오 2026</div>
+  <h1>7월 17–19일<br><em>3일 플랜</em></h1>
+  <div class="header-meta">
+    <div class="meta-item"><strong>13명</strong>인원</div>
+    <div class="meta-item"><strong>브로드웨이 호텔</strong>숙소 · 코타이</div>
+    <div class="meta-item"><strong>KE2015 / KE2016</strong>항공</div>
+    <div class="meta-item"><strong>500만원+</strong>예산</div>
+  </div>
+</div>
+
+<div class="opt-section">
+  <div class="opt-eyebrow">하우스 오브 댄싱 워터 — 공연 시간</div>
+  <div class="opt-toggle">
+    <button class="opt-btn active" onclick="setOpt(1,this)">
+      <span class="t">16:30</span>
+      <span class="d">1안 · 공연 먼저<br>→ 여유로운 회식 18:30~</span>
+    </button>
+    <button class="opt-btn" onclick="setOpt(2,this)">
+      <span class="t">19:30</span>
+      <span class="d">2안 · 저녁 공연<br>→ 늦은 회식 21:30~</span>
+    </button>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="nav-btn active" onclick="go('d1',this)">7/17 금요일</button>
+  <button class="nav-btn" onclick="go('d2',this)">7/18 토요일</button>
+  <button class="nav-btn" onclick="go('d3',this)">7/19 일요일</button>
+  <button class="nav-btn" onclick="go('dinner',this)">회식 장소</button>
+  <button class="nav-btn" onclick="go('night',this)">2차</button>
+  <button class="nav-btn" onclick="go('budget',this)">예산</button>
+  <button class="nav-btn" onclick="go('map',this)">지도</button>
+</div>
+
+<!-- D1 -->
+<div class="day-section active" id="d1">
+  <div class="sec-head"><h2>금요일 — 단체 일정</h2><p>하우스 오브 댄싱 워터 + 단체 회식</p></div>
+  <div class="timeline">
+    <div class="tl-row key">
+      <div class="tl-time">13:00</div>
+      <div class="tl-body">
+        <div class="tl-title">마카오 도착 · 체크인 <span class="tag t-key">필수</span></div>
+        <div class="tl-sub">KE2015 인천 10:10 출발 → 마카오 13:00 도착. 브로드웨이 호텔 체크인.</div>
+      </div>
+    </div>
+    <!-- 1안 -->
+    <div class="tl-row o1">
+      <div class="tl-time">13:30–15:15</div>
+      <div class="tl-body">
+        <div class="tl-title">자유 <span class="tag t-free">자유</span></div>
+        <div class="tl-sub">브로드웨이 푸드스트리트 간식, 갤럭시 둘러보기 등. 15:15 로비 집결 후 이동.</div>
+      </div>
+    </div>
+    <div class="tl-row show o1">
+      <div class="tl-time">16:30–17:50</div>
+      <div class="tl-body">
+        <div class="tl-title">🎭 하우스 오브 댄싱 워터 <span class="tag t-show">1안</span></div>
+        <div class="tl-sub">세계 최대 워터쇼. 2025년 5월 리뉴얼. 약 80분. 시티오브드림즈 코타이 (택시 10분). 티켓 소지 시 입점 레스토랑 20% 할인.</div>
+        <div class="infobox g">
+          <div class="infobox-label">티켓 (MOP · 13명 합산)</div>
+          <p>Gallery MOP698 → 약 130만원 &nbsp;／&nbsp; Signature MOP898 → 약 167만원<br>Grand MOP1,098 → 약 204만원 &nbsp;／&nbsp; Golden Circle MOP1,598 → 약 297만원</p>
+        </div>
+      </div>
+    </div>
+    <div class="tl-row food o1">
+      <div class="tl-time">18:30~</div>
+      <div class="tl-body">
+        <div class="tl-title">단체 회식 + 술자리 <span class="tag t-food">1안</span></div>
+        <div class="tl-sub">공연 후 여유롭게 이동. → 회식 장소 탭 참고.</div>
+      </div>
+    </div>
+    <!-- 2안 -->
+    <div class="tl-row o2" style="display:none">
+      <div class="tl-time">13:30–18:30</div>
+      <div class="tl-body">
+        <div class="tl-title">자유 오후 <span class="tag t-free">자유</span></div>
+        <div class="tl-sub">도착 후 여유롭게. 갤럭시 워터파크·수영장, 카지노, 브로드웨이 푸드스트리트 등.</div>
+      </div>
+    </div>
+    <div class="tl-row show o2" style="display:none">
+      <div class="tl-time">19:30–21:00</div>
+      <div class="tl-body">
+        <div class="tl-title">🎭 하우스 오브 댄싱 워터 <span class="tag t-show">2안</span></div>
+        <div class="tl-sub">세계 최대 워터쇼. 2025년 5월 리뉴얼. 약 80분. 19:15 도착 권장.</div>
+        <div class="infobox b">
+          <div class="infobox-label">티켓 (MOP · 13명 합산)</div>
+          <p>Gallery MOP698 → 약 130만원 &nbsp;／&nbsp; Signature MOP898 → 약 167만원<br>Grand MOP1,098 → 약 204만원 &nbsp;／&nbsp; Golden Circle MOP1,598 → 약 297만원</p>
+        </div>
+      </div>
+    </div>
+    <div class="tl-row food o2" style="display:none">
+      <div class="tl-time">21:30~</div>
+      <div class="tl-body">
+        <div class="tl-title">단체 회식 + 술자리 <span class="tag t-food">2안</span></div>
+        <div class="tl-sub">공연 직후 이동. 늦은 시간이지만 회식 분위기 올라옴. → 회식 장소 탭 참고.</div>
+      </div>
+    </div>
+    <div class="tl-row">
+      <div class="tl-time">23:00~</div>
+      <div class="tl-body">
+        <div class="tl-title">2차 <span class="tag t-free">자유</span></div>
+        <div class="tl-sub">바, 카지노, 루프탑 등 각자 자유. → 2차 탭 참고.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- D2 -->
+<div class="day-section" id="d2">
+  <div class="sec-head"><h2>토요일 — 완전 자유</h2><p>단체 일정 없음. 각자 원하는 대로.</p></div>
+  <div class="notice" style="margin-bottom:28px">금요일 회식 후 충분히 쉬고 자유롭게. 단체 일정 없음.</div>
+  <div class="pills-section">
+    <div class="pills-label">관광</div>
+    <div class="pills">
+      <span class="pill">세나도 광장 · 성 바울 성당</span>
+      <span class="pill">타이파 빌리지 골목</span>
+      <span class="pill">콜로안 · 에그타르트 본점</span>
+      <span class="pill">마카오 타워 번지 · 스카이워크</span>
+    </div>
+  </div>
+  <div class="pills-section">
+    <div class="pills-label">쇼핑</div>
+    <div class="pills">
+      <span class="pill">베네치안 그랜드 커낼 샵</span>
+      <span class="pill">파리지앵 에펠탑 몰</span>
+      <span class="pill">런더너 샵스</span>
+      <span class="pill">DFS 갤러리아</span>
+    </div>
+  </div>
+  <div class="pills-section">
+    <div class="pills-label">휴식 · 액티비티</div>
+    <div class="pills">
+      <span class="pill">갤럭시 워터파크</span>
+      <span class="pill">반얀트리 · 리츠칼튼 스파</span>
+      <span class="pill">카지노 (베네치안 · MGM · 윈팰리스)</span>
+      <span class="pill">스튜디오시티 골든릴 관람차</span>
+    </div>
+  </div>
+</div>
+
+<!-- D3 -->
+<div class="day-section" id="d3">
+  <div class="sec-head"><h2>일요일 — 브런치 · 귀국</h2><p>KE2016 14:10 출발</p></div>
+  <div class="timeline">
+    <div class="tl-row">
+      <div class="tl-time">09:00–10:30</div>
+      <div class="tl-body">
+        <div class="tl-title">기상 · 짐 정리 <span class="tag t-free">자유</span></div>
+        <div class="tl-sub">여유롭게 기상. 짐 정리 후 체크아웃 준비.</div>
+      </div>
+    </div>
+    <div class="tl-row food">
+      <div class="tl-time">10:30–12:00</div>
+      <div class="tl-body">
+        <div class="tl-title">단체 브런치 <span class="tag t-key">필수</span></div>
+        <div class="tl-sub">마지막 단체 식사. 가볍고 여유롭게.</div>
+        <div class="cards">
+          <div class="card" onclick="this.classList.toggle('open')">
+            <div class="card-h"><div class="card-l"><div class="n">Broadway Food Street</div><div class="s">다양한 아시아 음식 · 호텔 바로 앞</div></div><div class="card-r"><div class="p">HK$80–150/인</div><div class="bgs"><span class="bg rec">호텔 바로 앞</span></div></div></div>
+            <div class="card-b">체크아웃 후 짐 맡기고 바로. 팀호완 포함 다양한 식당. 13명 분산해서 각자 취향껏.</div>
+          </div>
+          <div class="card" onclick="this.classList.toggle('open')">
+            <div class="card-h"><div class="card-l"><div class="n">갤럭시 호텔 뷔페 브런치</div><div class="s">인터내셔널 뷔페 · 스카이브릿지 연결</div></div><div class="card-r"><div class="p">HK$200–300/인</div><div class="bgs"><span class="bg rec">연결 통로</span></div></div></div>
+            <div class="card-b">브로드웨이에서 스카이브릿지 직결. 마지막 식사답게 여유롭고 풍성하게. 단체 예약 권장.</div>
+          </div>
+          <div class="card" onclick="this.classList.toggle('open')">
+            <div class="card-h"><div class="card-l"><div class="n">Café Uou Uou</div><div class="s">로컬 브런치 카페 · 타이파 빌리지</div></div><div class="card-r"><div class="p">HK$100–180/인</div><div class="bgs"><span class="bg rec">로컬 추천</span></div></div></div>
+            <div class="card-b">마카오 호텔리어 추천 브런치 카페. 08:30 오픈. 타이파 빌리지 골목 안. 13명은 분산 방문 또는 사전 문의.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tl-row key">
+      <div class="tl-time">12:00</div>
+      <div class="tl-body">
+        <div class="tl-title">체크아웃 · 공항 이동</div>
+        <div class="tl-sub">브로드웨이 호텔 → 마카오 국제공항 택시 약 10분.</div>
+      </div>
+    </div>
+    <div class="tl-row key">
+      <div class="tl-time">14:10</div>
+      <div class="tl-body">
+        <div class="tl-title">KE2016 마카오 출발 → 인천 19:00 도착</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 회식 -->
+<div class="day-section" id="dinner">
+  <div class="sec-head"><h2>회식 장소</h2><p>금요일 공연 후 · 13명 단체</p></div>
+  <div class="notice" style="margin-bottom:20px">1안(16:30 공연) → 18:30~ &nbsp;／&nbsp; 2안(19:30 공연) → 21:30~<br>하우스오브댄싱워터 티켓 소지 시 시티오브드림즈 레스토랑 20% 할인 가능.</div>
+  <div class="cards">
+    <div class="card" onclick="this.classList.toggle('open')">
+      <div class="card-h"><div class="card-l"><div class="n">Gordon Ramsay Pub & Grill</div><div class="s">영국식 스테이크·펍 · 베네치안 마카오</div></div><div class="card-r"><div class="p">HK$400–600/인</div><div class="bgs"><span class="bg rec">펍 분위기</span><span class="bg rec">코타이</span></div></div></div>
+      <div class="card-b">2023년 오픈. 고든 램지 마카오 첫 레스토랑. 펍 분위기라 술 마시며 먹기 최적. 비프 웰링턴·피시앤칩스 시그니처. 활기차고 시끌벅적한 회식 분위기. 13명 단체 예약 필수.</div>
+    </div>
+    <div class="card" onclick="this.classList.toggle('open')">
+      <div class="card-h"><div class="card-l"><div class="n">Feng Wei Ju (豐味居)</div><div class="s">쓰촨 요리 · StarWorld Hotel</div></div><div class="card-r"><div class="p">HK$500–700/인</div><div class="bgs"><span class="bg star">미슐랭 ⭐⭐</span></div></div></div>
+      <div class="card-b">미슐랭 2스타 쓰촨 요리. 마라훠궈·수이주위 등 자극적 요리가 맥주·바이주와 잘 맞음. 매운 음식 못 드시는 분 사전 체크 필요.</div>
+    </div>
+    <div class="card" onclick="this.classList.toggle('open')">
+      <div class="card-h"><div class="card-l"><div class="n">The Eight (八)</div><div class="s">광둥 요리 · 그랜드 리스보아</div></div><div class="card-r"><div class="p">HK$600–900/인</div><div class="bgs"><span class="bg star">미슐랭 ⭐⭐</span><span class="bg rec">상무님 카드</span></div></div></div>
+      <div class="card-b">마카오 랜드마크 미슐랭 2스타 광둥 파인다이닝. 격식 있는 분위기. 와인·고량주와 잘 어울림. 단체 예약 必.</div>
+    </div>
+    <div class="card" onclick="this.classList.toggle('open')">
+      <div class="card-h"><div class="card-l"><div class="n">북방관 (北方館)</div><div class="s">중국 북방 요리 · 베네치안 호텔 1층</div></div><div class="card-r"><div class="p">HK$200–350/인</div><div class="bgs"><span class="bg rec">가성비</span><span class="bg rec">늦게까지</span></div></div></div>
+      <div class="card-b">탄탄면·가지튀김·만두 등 맥주 안주 최적. 오픈 키친 수타면 퍼포먼스. 늦은 시간까지 영업. 2안(21:30~)에 특히 적합.</div>
+    </div>
+    <div class="card" onclick="this.classList.toggle('open')">
+      <div class="card-h"><div class="card-l"><div class="n">António</div><div class="s">포르투갈 요리 · 타이파 빌리지</div></div><div class="card-r"><div class="p">HK$400–600/인</div><div class="bgs"><span class="bg star">미슐랭 ⭐⭐</span><span class="bg rec">마카오 감성</span></div></div></div>
+      <div class="card-b">포르투갈 와인과 함께하는 정통 포르투갈 요리. 새우커리·포르투갈식 스테이크 시그니처. 공연 후 택시 15분 (타이파 위치).</div>
+    </div>
+    <div class="card" onclick="this.classList.toggle('open')">
+      <div class="card-h"><div class="card-l"><div class="n">Zi Yat Heen (紫逸軒)</div><div class="s">광둥 딤섬·코스 · 포시즌스 마카오</div></div><div class="card-r"><div class="p">HK$400–600/인</div><div class="bgs"><span class="bg star">미슐랭 ⭐</span><span class="bg rec">코타이</span></div></div></div>
+      <div class="card-b">포시즌스 미슐랭 1스타 광둥 요리. 크리스피 치킨·딤섬 코스. 고급스럽고 세련된 분위기.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 2차 -->
+<div class="day-section" id="night">
+  <div class="sec-head"><h2>2차 나이트라이프</h2><p>회식 후 자유 선택</p></div>
+  <div class="cards">
+    <div class="card" onclick="this.classList.toggle('open')">
+      <div class="card-h"><div class="card-l"><div class="n">38 라운지 바</div><div class="s">루프탑 바 · 알티라 호텔 38F · 타이파</div></div><div class="card-r"><div class="p">칵테일 HK$100–150</div><div class="bgs"><span class="bg rec">루프탑 야경</span></div></div></div>
+      <div class="card-b">마카오 호텔리어들이 퇴근 후 가는 루프탑 바. 사이방 대교 + 반도 야경 파노라마. 10년 넘은 로컬 명소. 조용히 대화하며 마시기 좋음.</div>
+    </div>
+    <div class="card" onclick="this.classList.toggle('open')">
+      <div class="card-h"><div class="card-l"><div class="n">Macallan Whisky Bar & Lounge</div><div class="s">위스키 바 · 그랜드 하얏트 마카오</div></div><div class="card-r"><div class="p">HK$120–500+</div><div class="bgs"><span class="bg rec">위스키 전문</span></div></div></div>
+      <div class="card-b">아시아 유일 맥캘런 공식 위스키 바. 다양한 싱글몰트 라인업. 고급스럽고 조용한 분위기.</div>
+    </div>
+    <div class="card" onclick="this.classList.toggle('open')">
+      <div class="card-h"><div class="card-l"><div class="n">China Rouge</div><div class="s">상하이 스타일 클럽·라운지 · 갤럭시 마카오</div></div><div class="card-r"><div class="p">HK$200–400</div><div class="bgs"><span class="bg rec">갤럭시 연결</span></div></div></div>
+      <div class="card-b">상하이 황금기 컨셉 고급 클럽. 갤럭시 내 위치로 브로드웨이 호텔과 가까움. 라이브 밴드. 단체 프라이빗 부스 예약 가능.</div>
+    </div>
+    <div class="card" onclick="this.classList.toggle('open')">
+      <div class="card-h"><div class="card-l"><div class="n">Goa Nite</div><div class="s">칵테일 바 · 타이파 빌리지 3층</div></div><div class="card-r"><div class="p">HK$80–150</div><div class="bgs"><span class="bg rec">창의적 칵테일</span></div></div></div>
+      <div class="card-b">타이파 구시가지 3층 보헤미안 바. 마카오·인도 퓨전 창의적 칵테일. 인도 바텐더 즉흥 제조. 로컬 감성.</div>
+    </div>
+    <div class="card" onclick="this.classList.toggle('open')">
+      <div class="card-h"><div class="card-l"><div class="n">카지노</div><div class="s">베네치안 · 갤럭시 · 윈팰리스 · 코타이</div></div><div class="card-r"><div class="p">자유</div><div class="bgs"><span class="bg rec">24시간</span><span class="bg rec">도보</span></div></div></div>
+      <div class="card-b">24시간 운영. 게임 시 음료 무료. 블랙잭·바카라·슬롯. 베네치안·갤럭시는 브로드웨이 호텔에서 도보 가능.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 예산 -->
+<div class="day-section" id="budget">
+  <div class="sec-head"><h2>예산 시뮬레이션</h2><p>13명 기준</p></div>
+  <table class="budget-t">
+    <tr><td class="lbl">하우스 오브 댄싱 워터 (Signature석 기준)</td><td class="amt">약 167만원</td></tr>
+    <tr><td class="lbl">금요일 단체 회식 (HK$400–600/인)</td><td class="amt">약 100–140만원</td></tr>
+    <tr><td class="lbl">일요일 브런치</td><td class="amt">약 30–60만원</td></tr>
+    <tr><td class="lbl">교통 · 간식 · 예비</td><td class="amt">약 30만원</td></tr>
+    <tr><td class="lbl">합계</td><td class="amt">약 330–400만원</td></tr>
+  </table>
+  <div class="notice">
+    ✅ &nbsp;500만원 예산 내 100만원+ 여유<br>
+    ✅ &nbsp;Gallery석 선택 시 약 37만원 추가 절감<br>
+    ✅ &nbsp;상무님 카드로 The Eight 업그레이드 시 별도<br>
+    ⚠️ &nbsp;하우스오브댄싱워터 — 성수기 금요일, 사전 예약 필수<br>
+    ⚠️ &nbsp;미슐랭 레스토랑 단체 예약 — 최소 3–4주 전 권장
+  </div>
+</div>
+
+<!-- 지도 -->
+<div class="day-section" id="map">
+  <div class="sec-head"><h2>장소 지도</h2><p>브로드웨이 호텔 기준 전체 동선</p></div>
+  <div style="font-size:12px;color:var(--ink2);margin-bottom:16px;line-height:1.7;">
+    핀을 클릭하면 장소 정보를 확인할 수 있어요.<br>
+    코타이 스트립에 주요 장소가 밀집. The Eight · Feng Wei Ju는 마카오 반도 (택시 15–20분).
+  </div>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;font-size:11px;color:var(--ink3);">
+    <span><span style="color:#1a1916;font-size:14px;">🏨</span> 숙소</span>
+    <span><span style="color:#7c3aed;font-size:14px;">🎭</span> 공연</span>
+    <span><span style="color:#c2410c;font-size:14px;">🍽</span> 회식</span>
+    <span><span style="color:#0369a1;font-size:14px;">🍻</span> 2차 바</span>
+  </div>
+  <iframe
+    width="100%"
+    height="500"
+    style="border:1px solid var(--line2);border-radius:8px;display:block;"
+    loading="lazy"
+    allowfullscreen
+    referrerpolicy="no-referrer-when-downgrade"
+    src="https://www.google.com/maps/embed/v1/search?key=AIzaSyA0Um4SA-lQntd7IcArPPYwMkbCJFA57YU&q=Broadway+Macau,City+of+Dreams+Macau,Gordon+Ramsay+Pub+Grill+Macau,Zi+Yat+Heen+Macau,North+Restaurant+Venetian+Macau,Antonio+Restaurant+Taipa+Macau&center=22.158,113.557&zoom=13">
+  </iframe>
+  <div style="margin-top:20px;">
+    <div class="sec-head" style="margin-bottom:14px;"><h2 style="font-size:16px;">📍 장소별 링크</h2></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+      <a href="https://maps.google.com/?cid=16622329831663230928" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);transition:border-color .15s;" onmouseover="this.style.borderColor='var(--line)'" onmouseout="this.style.borderColor='var(--line2)'">
+        <div style="font-size:12px;font-weight:500;">🏨 브로드웨이 호텔</div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:2px;">숙소 · Cotai</div>
+      </a>
+      <a href="https://maps.google.com/?cid=9835731049318005022" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);transition:border-color .15s;" onmouseover="this.style.borderColor='var(--line)'" onmouseout="this.style.borderColor='var(--line2)'">
+        <div style="font-size:12px;font-weight:500;">🎭 하우스 오브 댄싱 워터</div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:2px;">공연 · City of Dreams</div>
+      </a>
+      <a href="https://maps.google.com/?cid=12512763670358687970" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);transition:border-color .15s;" onmouseover="this.style.borderColor='var(--line)'" onmouseout="this.style.borderColor='var(--line2)'">
+        <div style="font-size:12px;font-weight:500;">🍽 Gordon Ramsay Pub & Grill</div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:2px;">회식 · The Londoner · HK$400–600/인</div>
+      </a>
+      <a href="https://maps.google.com/?cid=2116139371841089945" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);transition:border-color .15s;" onmouseover="this.style.borderColor='var(--line)'" onmouseout="this.style.borderColor='var(--line2)'">
+        <div style="font-size:12px;font-weight:500;">🍽 Zi Yat Heen <span style="font-size:10px;color:var(--opt1);">미슐랭 ⭐</span></div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:2px;">회식 · 포시즌스 · HK$400–600/인</div>
+      </a>
+      <a href="https://maps.google.com/?cid=16439838980378035686" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);transition:border-color .15s;" onmouseover="this.style.borderColor='var(--line)'" onmouseout="this.style.borderColor='var(--line2)'">
+        <div style="font-size:12px;font-weight:500;">🍽 북방관 (North)</div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:2px;">회식 · 베네치안 · HK$200–350/인</div>
+      </a>
+      <a href="https://maps.google.com/?cid=6069316082500052466" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);transition:border-color .15s;" onmouseover="this.style.borderColor='var(--line)'" onmouseout="this.style.borderColor='var(--line2)'">
+        <div style="font-size:12px;font-weight:500;">🍽 António <span style="font-size:10px;color:var(--opt1);">미슐랭 ⭐⭐</span></div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:2px;">회식 · 타이파 빌리지 · HK$400–600/인</div>
+      </a>
+      <a href="https://maps.google.com/?cid=13939889322730497331" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);transition:border-color .15s;" onmouseover="this.style.borderColor='var(--line)'" onmouseout="this.style.borderColor='var(--line2)'">
+        <div style="font-size:12px;font-weight:500;">🍽 The Eight <span style="font-size:10px;color:var(--opt1);">미슐랭 ⭐⭐</span></div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:2px;">회식 · 그랜드 리스보아 · HK$600–900/인</div>
+      </a>
+      <a href="https://maps.google.com/?cid=5454585712387572023" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);transition:border-color .15s;" onmouseover="this.style.borderColor='var(--line)'" onmouseout="this.style.borderColor='var(--line2)'">
+        <div style="font-size:12px;font-weight:500;">🍽 Feng Wei Ju <span style="font-size:10px;color:var(--opt1);">미슐랭 ⭐⭐</span></div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:2px;">회식 · StarWorld · HK$500–700/인</div>
+      </a>
+      <a href="https://maps.google.com/?cid=2638711359249802635" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);transition:border-color .15s;" onmouseover="this.style.borderColor='var(--line)'" onmouseout="this.style.borderColor='var(--line2)'">
+        <div style="font-size:12px;font-weight:500;">🍻 Goa Nights</div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:2px;">2차 · 브로드웨이 · 칵테일 HK$80–150</div>
+      </a>
+      <a href="https://maps.google.com/?cid=11242724665506093339" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);transition:border-color .15s;" onmouseover="this.style.borderColor='var(--line)'" onmouseout="this.style.borderColor='var(--line2)'">
+        <div style="font-size:12px;font-weight:500;">🍻 China Rouge</div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:2px;">2차 · 갤럭시 · HK$200–400</div>
+      </a>
+      <a href="https://maps.google.com/?cid=14963318935391536851" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);transition:border-color .15s;" onmouseover="this.style.borderColor='var(--line)'" onmouseout="this.style.borderColor='var(--line2)'">
+        <div style="font-size:12px;font-weight:500;">🍻 38 라운지 바</div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:2px;">2차 · 알티라 38F · 칵테일 HK$100–150</div>
+      </a>
+      <a href="https://maps.google.com/?cid=7020312242073092580" target="_blank" style="display:block;padding:10px 14px;border:1px solid var(--line2);border-radius:6px;text-decoration:none;color:var(--ink);transition:border-color .15s;" onmouseover="this.style.borderColor='var(--line)'" onmouseout="this.style.borderColor='var(--line2)'">
+        <div style="font-size:12px;font-weight:500;">🍻 Macallan Whisky Bar</div>
+        <div style="font-size:11px;color:var(--ink3);margin-top:2px;">2차 · 그랜드 하얏트 · HK$120–500+</div>
+      </a>
+    </div>
+  </div>
+</div>
+
+</div>
+<script>
+function setOpt(n,el){
+  document.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.o1').forEach(e=>e.style.display=n===1?'':'none');
+  document.querySelectorAll('.o2').forEach(e=>e.style.display=n===2?'':'none');
+}
+function go(id,el){
+  document.querySelectorAll('.day-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>
